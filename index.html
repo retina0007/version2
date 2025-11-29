@@ -82,6 +82,22 @@
             background: #E5E7EB;
             border-radius: 4px;
         }
+
+        /* Nav Marker Logic für flüssige Bewegung */
+        #nav-marker {
+            /* Nur Opacity animieren, Position wird per JS frame-genau gesetzt */
+            transition: opacity 0.3s ease; 
+            will-change: left, width;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link.active {
+            color: white !important;
+        }
+        .nav-link:not(.active):hover {
+            color: #0540AD;
+        }
     </style>
 </head>
 <body class="font-sans text-textDark bg-white antialiased overflow-x-hidden">
@@ -95,12 +111,20 @@
                 </div>
                 <span class="font-bold text-xl tracking-tight text-primary">Retina Flow</span>
             </a>
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#problems" class="text-sm font-medium text-textDark hover:text-primary transition-colors">Probleme</a>
-                <a href="#solutions" class="text-sm font-medium text-textDark hover:text-primary transition-colors">Lösungen</a>
-                <a href="#roi" class="text-sm font-medium text-textDark hover:text-primary transition-colors">ROI-Rechnung</a>
-                <a href="#faq" class="text-sm font-medium text-textDark hover:text-primary transition-colors">FAQ</a>
+            
+            <!-- Center Menu with Floating Marker -->
+            <div class="hidden md:flex items-center relative bg-gray-100/50 rounded-full p-1.5 border border-white/40">
+                <!-- The Moving "Heavy" Rectangle -->
+                <div id="nav-marker" class="absolute h-[calc(100%-10px)] top-[5px] rounded-full bg-primary shadow-md z-0 opacity-0"></div>
+                
+                <!-- Nav Links -->
+                <a href="#start" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">Startseite</a>
+                <a href="#problems" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">Probleme</a>
+                <a href="#solutions" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">Lösungen</a>
+                <a href="#roi" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">Ersparnis</a>
+                <a href="#faq" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">FAQ</a>
             </div>
+
             <div class="flex items-center gap-3">
                 <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-primary text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/20 flex items-center gap-2">
                     Kostenlos starten 
@@ -115,6 +139,7 @@
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl hidden pt-32 px-6 transition-opacity duration-300">
         <div class="flex flex-col space-y-6 text-center">
+            <a href="#start" class="text-2xl font-bold text-textDark hover:text-primary transition" onclick="closeMenu()">Startseite</a>
             <a href="#problems" class="text-2xl font-bold text-textDark hover:text-primary transition" onclick="closeMenu()">Probleme</a>
             <a href="#solutions" class="text-2xl font-bold text-textDark hover:text-primary transition" onclick="closeMenu()">Lösungen</a>
             <a href="#roi" class="text-2xl font-bold text-textDark hover:text-primary transition" onclick="closeMenu()">ROI-Rechnung</a>
@@ -126,8 +151,8 @@
         </button>
     </div>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-primary overflow-hidden">
+    <!-- Hero Section (ID hinzugefügt) -->
+    <section id="start" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-primary overflow-hidden">
         <div class="absolute top-0 right-0 w-2/3 h-full bg-white/5 skew-x-12 transform origin-top-right pointer-events-none"></div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -871,8 +896,127 @@
             calculateROI();
         }
 
+        // --- UPDATED: Continuous Liquid Nav Marker Logic (Präzise Version) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const marker = document.getElementById('nav-marker');
+            const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+            
+            // Mapping von Links zu Sections
+            const targets = navLinks.map(link => {
+                const href = link.getAttribute('href');
+                // Schutz gegen leere Hrefs oder externe Links
+                if (!href || !href.startsWith('#')) return null;
+                const id = href.substring(1);
+                const section = document.getElementById(id);
+                return { link, section };
+            }).filter(item => item && item.section);
+
+            function updateMarker() {
+                if (!marker || targets.length === 0) return;
+
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+                // Trigger etwas weiter oben (35%), fühlt sich natürlicher an beim Lesen
+                const triggerPoint = scrollY + (windowHeight * 0.35); 
+                const docHeight = document.body.scrollHeight;
+
+                // 1. Sonderfall: Ganz oben auf der Seite -> Hart auf Startseite zwingen
+                if (scrollY < 10) {
+                    const startItem = targets[0];
+                    marker.style.opacity = '1';
+                    marker.style.left = `${startItem.link.offsetLeft}px`;
+                    marker.style.width = `${startItem.link.offsetWidth}px`;
+                    
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    startItem.link.classList.add('active');
+                    return;
+                }
+
+                // 2. Normaler Scroll-Loop
+                let activeIndex = -1;
+                let progress = 0;
+
+                for (let i = 0; i < targets.length; i++) {
+                    const current = targets[i];
+                    const next = targets[i + 1];
+
+                    const currentTop = current.section.offsetTop;
+                    // Wenn kein nächstes Element, nimm das Ende der Seite
+                    const nextTop = next ? next.section.offsetTop : docHeight;
+
+                    // Sind wir in diesem Abschnitt?
+                    if (triggerPoint >= currentTop - 20 && triggerPoint < nextTop) {
+                        activeIndex = i;
+                        
+                        // Berechnung des Fortschritts zum nächsten Button (0.0 bis 1.0)
+                        if (next) {
+                            const totalDistance = nextTop - currentTop;
+                            const coveredDistance = triggerPoint - currentTop;
+                            progress = coveredDistance / totalDistance;
+                        } else {
+                            progress = 0; // Letztes Element
+                        }
+                        break;
+                    }
+                }
+
+                // Fallback: Wenn wir vor dem ersten Element sind (sollte durch Fall 1 abgefangen sein, aber sicherheitshalber)
+                if (activeIndex === -1 && triggerPoint < targets[0].section.offsetTop) {
+                    activeIndex = 0;
+                    progress = 0;
+                }
+
+                if (activeIndex !== -1) {
+                    marker.style.opacity = '1';
+
+                    const currentItem = targets[activeIndex];
+                    const nextItem = targets[activeIndex + 1];
+
+                    // Nutzung von offsetLeft/offsetWidth für pixelgenaue Positionierung im Container
+                    let targetLeft = currentItem.link.offsetLeft;
+                    let targetWidth = currentItem.link.offsetWidth;
+
+                    // Interpolation: Gleitende Bewegung zum nächsten Punkt
+                    if (nextItem) {
+                        const nextLeft = nextItem.link.offsetLeft;
+                        const nextWidth = nextItem.link.offsetWidth;
+
+                        // Lineare Interpolation basierend auf Scroll-Fortschritt
+                        targetLeft = targetLeft + (nextLeft - targetLeft) * progress;
+                        targetWidth = targetWidth + (nextWidth - targetWidth) * progress;
+                    }
+
+                    // Werte anwenden
+                    marker.style.left = `${targetLeft}px`;
+                    marker.style.width = `${targetWidth}px`;
+
+                    // Text-Farbe umschalten (Hysterese bei 50%)
+                    navLinks.forEach((link, idx) => {
+                        link.classList.remove('active');
+                        if (idx === activeIndex && progress < 0.5) {
+                            link.classList.add('active');
+                        } else if (idx === activeIndex + 1 && progress >= 0.5) {
+                            link.classList.add('active');
+                        } else if (idx === activeIndex && !nextItem) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            }
+
+            // Events
+            window.addEventListener('scroll', () => requestAnimationFrame(updateMarker));
+            window.addEventListener('resize', () => requestAnimationFrame(updateMarker));
+            // Wichtig: Auch bei 'load' feuern, falls Schriftarten das Layout verschieben
+            window.addEventListener('load', updateMarker);
+            
+            // Initialer Aufruf
+            updateMarker();
+        });
+        // --- End Nav Marker Logic ---
+
         // Gemini API Interaction
-        const apiKey = ""; 
+        const apiKey = "AIzaSyBzVKK8qCSFH0tW9ojhjgjl-KPSZv5n2eE"; 
 
         async function generateAIMessage() {
             const name = document.getElementById('demo-name').value || "Fahrschüler";
