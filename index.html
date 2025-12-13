@@ -85,8 +85,8 @@
 
         /* Nav Marker Logic für flüssige Bewegung */
         #nav-marker {
-            /* Nur Opacity animieren, Position wird per JS frame-genau gesetzt */
-            transition: opacity 0.3s ease; 
+            /* Transition für Left und Width hinzufügen, damit es sanft gleitet statt zu springen */
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
             will-change: left, width;
         }
         .nav-link {
@@ -982,12 +982,12 @@
 
                 const scrollY = window.scrollY;
                 const windowHeight = window.innerHeight;
-                // Trigger etwas weiter oben (35%), fühlt sich natürlicher an beim Lesen
-                const triggerPoint = scrollY + (windowHeight * 0.35); 
+                // Trigger in der Mitte des Bildschirms für bessere Genauigkeit
+                const triggerPoint = scrollY + (windowHeight * 0.5); 
                 const docHeight = document.body.scrollHeight;
 
                 // 1. Sonderfall: Ganz oben auf der Seite -> Hart auf Startseite zwingen
-                if (scrollY < 10) {
+                if (scrollY < 50) {
                     const startItem = targets[0];
                     marker.style.opacity = '1';
                     marker.style.left = `${startItem.link.offsetLeft}px`;
@@ -998,73 +998,45 @@
                     return;
                 }
 
-                // 2. Normaler Scroll-Loop
+                // 2. Finde den aktiven Abschnitt (ohne Interpolation)
                 let activeIndex = -1;
-                let progress = 0;
 
                 for (let i = 0; i < targets.length; i++) {
                     const current = targets[i];
                     const next = targets[i + 1];
 
-                    const currentTop = current.section.offsetTop;
+                    // Offset anpassen, damit der Marker früher wechselt
+                    const currentTop = current.section.offsetTop - 100;
                     // Wenn kein nächstes Element, nimm das Ende der Seite
-                    const nextTop = next ? next.section.offsetTop : docHeight;
+                    const nextTop = next ? next.section.offsetTop - 100 : docHeight;
 
                     // Sind wir in diesem Abschnitt?
-                    if (triggerPoint >= currentTop - 20 && triggerPoint < nextTop) {
+                    if (triggerPoint >= currentTop && triggerPoint < nextTop) {
                         activeIndex = i;
-                        
-                        // Berechnung des Fortschritts zum nächsten Button (0.0 bis 1.0)
-                        if (next) {
-                            const totalDistance = nextTop - currentTop;
-                            const coveredDistance = triggerPoint - currentTop;
-                            progress = coveredDistance / totalDistance;
-                        } else {
-                            progress = 0; // Letztes Element
-                        }
                         break;
                     }
                 }
 
-                // Fallback: Wenn wir vor dem ersten Element sind (sollte durch Fall 1 abgefangen sein, aber sicherheitshalber)
-                if (activeIndex === -1 && triggerPoint < targets[0].section.offsetTop) {
-                    activeIndex = 0;
-                    progress = 0;
+                // Fallback: Wenn wir ganz unten sind, nimm das letzte Element
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+                    activeIndex = targets.length - 1;
                 }
 
                 if (activeIndex !== -1) {
                     marker.style.opacity = '1';
 
                     const currentItem = targets[activeIndex];
-                    const nextItem = targets[activeIndex + 1];
 
-                    // Nutzung von offsetLeft/offsetWidth für pixelgenaue Positionierung im Container
-                    let targetLeft = currentItem.link.offsetLeft;
-                    let targetWidth = currentItem.link.offsetWidth;
+                    // Exakte Positionierung auf dem Button (keine Drift-Berechnung mehr)
+                    marker.style.left = `${currentItem.link.offsetLeft}px`;
+                    marker.style.width = `${currentItem.link.offsetWidth}px`;
 
-                    // Interpolation: Gleitende Bewegung zum nächsten Punkt
-                    if (nextItem) {
-                        const nextLeft = nextItem.link.offsetLeft;
-                        const nextWidth = nextItem.link.offsetWidth;
-
-                        // Lineare Interpolation basierend auf Scroll-Fortschritt
-                        targetLeft = targetLeft + (nextLeft - targetLeft) * progress;
-                        targetWidth = targetWidth + (nextWidth - targetWidth) * progress;
-                    }
-
-                    // Werte anwenden
-                    marker.style.left = `${targetLeft}px`;
-                    marker.style.width = `${targetWidth}px`;
-
-                    // Text-Farbe umschalten (Hysterese bei 50%)
+                    // Text-Farbe umschalten
                     navLinks.forEach((link, idx) => {
-                        link.classList.remove('active');
-                        if (idx === activeIndex && progress < 0.5) {
+                        if (idx === activeIndex) {
                             link.classList.add('active');
-                        } else if (idx === activeIndex + 1 && progress >= 0.5) {
-                            link.classList.add('active');
-                        } else if (idx === activeIndex && !nextItem) {
-                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
                         }
                     });
                 }
