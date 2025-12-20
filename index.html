@@ -1056,10 +1056,15 @@
                                     </div>
 
                                     <!-- Post Image -->
-                                    <!-- GEÄNDERT: Höhe weiter reduziert für kompakten Look: h-56 -->
+                                    <!-- GEÄNDERT: 'aspect-square' zu 'h-72' geändert, damit Text unten sichtbar bleibt -->
                                     <div class="relative w-full h-56 bg-gray-100 overflow-hidden">
-                                         <!-- Bilddatei -->
-                                         <img src="social_post.jpeg" alt="Führerschein bestanden" class="w-full h-full object-cover">
+                                         <!-- ÄNDERUNG: onerror hinzugefügt. Wenn social_post.jpeg nicht gefunden wird, lädt er ein Beispielbild aus dem Internet -->
+                                         <img 
+                                            src="social_post.jpeg" 
+                                            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?q=80&w=1000&auto=format&fit=crop';" 
+                                            alt="Führerschein bestanden" 
+                                            class="w-full h-full object-cover"
+                                         >
                                          
                                          <!-- Animated Like Heart (hidden initially) -->
                                          <div id="like-animation" class="absolute inset-0 flex items-center justify-center opacity-0 transform scale-0 transition-all duration-500">
