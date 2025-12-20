@@ -65,6 +65,25 @@
             transform: translateY(0);
         }
 
+        /* NEU: Schwebe-Animation für die Kreise */
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-float-gentle {
+            animation: float-gentle 4s ease-in-out infinite;
+        }
+        
+        /* NEU: Pulsierender Effekt für den aktiven Kreis */
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+        }
+        .active-pulse {
+            animation: pulse-ring 2s infinite;
+        }
+
         /* Glassmorphism Navigation */
         .nav-glass {
             backdrop-filter: blur(12px);
@@ -789,108 +808,114 @@
     </section>
 
     <!-- NEW: AI Live Demo Section (Simulated) -->
-    <section class="py-12 lg:py-20 bg-white relative overflow-hidden">
+    <!-- GEÄNDERT: Padding weiter reduziert (py-12 statt py-20) für kompakten "Rahmen"-Look -->
+    <section class="py-8 lg:py-16 bg-white relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50"></div>
             <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-orange-50 rounded-full blur-3xl opacity-50"></div>
         </div>
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-8 lg:mb-12 reveal">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold mb-4 shadow-lg animate-pulse"><span class="text-lg">✨</span> Live AI Demo</div>
-                <h2 class="text-3xl lg:text-5xl font-bold text-[#1A1A1A] mb-4">Erlebe die KI in Aktion</h2>
-                <p class="text-base lg:text-lg text-gray-600 max-w-2xl mx-auto">Wähle einen Modus und sieh zu, wie Retina Flow die Kommunikation für dich übernimmt.</p>
+            <!-- GEÄNDERT: Margin reduziert (mb-8) -->
+            <div class="text-center mb-8 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold mb-3 shadow-lg animate-pulse"><span class="text-lg">✨</span> Live AI Demo</div>
+                <h2 class="text-3xl lg:text-4xl font-bold text-[#1A1A1A] mb-3">Erlebe die KI in Aktion</h2>
+                <p class="text-base text-gray-600 max-w-2xl mx-auto">Wähle einen Modus und sieh zu, wie Retina Flow die Kommunikation übernimmt.</p>
             </div>
             
-            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start reveal delay-100">
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start reveal delay-100">
                 <!-- Left: Controls & Description -->
-                <div class="space-y-6 lg:space-y-8 order-2 lg:order-1">
+                <div class="space-y-5 lg:space-y-6 order-2 lg:order-1">
                     
                     <!-- 3 Round Switch Buttons (Menu Style) -->
-                    <div class="flex justify-center lg:justify-start gap-4 lg:gap-6">
+                    <div class="flex justify-center lg:justify-start gap-4">
                         <!-- Button 1: Bewertungs-Autopilot -->
-                        <button onclick="setScenario('passed')" id="btn-passed" class="group relative w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white border-2 border-blue-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-2 ring-accent scale-105 active-scenario transform hover:-translate-y-1">
-                            <div class="absolute -top-1 -right-1 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10">LEAD</div>
-                            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-blue-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
-                                <i data-lucide="trophy" class="w-4 h-4 lg:w-5 lg:h-5 text-primary"></i>
+                        <button onclick="setScenario('passed')" id="btn-passed" class="animate-float-gentle group relative w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white border-2 border-blue-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-0.5 ring-2 ring-accent scale-105 active-scenario active-pulse">
+                            <div class="absolute -top-1 -right-1 bg-green-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow-sm z-10">LEAD</div>
+                            <div class="w-6 h-6 lg:w-8 lg:h-8 bg-blue-50 rounded-full flex items-center justify-center mb-0.5 transition-transform group-hover:scale-110">
+                                <i data-lucide="trophy" class="w-3 h-3 lg:w-4 lg:h-4 text-primary"></i>
                             </div>
-                            <span class="text-[9px] lg:text-[10px] font-bold text-accent uppercase tracking-wide group-hover:text-accent">Review</span>
+                            <span class="text-[8px] lg:text-[9px] font-bold text-accent uppercase tracking-wide group-hover:text-accent">Review</span>
                         </button>
 
                         <!-- Button 2: Termin-Autopilot -->
-                        <button onclick="setScenario('reminder')" id="btn-reminder" class="group relative w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white border-2 border-gray-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-offset-4 ring-transparent transform hover:-translate-y-1">
-                            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gray-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
-                                <i data-lucide="calendar-days" class="w-4 h-4 lg:w-5 lg:h-5 text-gray-600 group-hover:text-accent"></i>
+                        <button onclick="setScenario('reminder')" id="btn-reminder" class="animate-float-gentle group relative w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white border-2 border-gray-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-0.5 ring-offset-4 ring-transparent" style="animation-delay: 1s;">
+                            <div class="w-6 h-6 lg:w-8 lg:h-8 bg-gray-50 rounded-full flex items-center justify-center mb-0.5 transition-transform group-hover:scale-110">
+                                <i data-lucide="calendar-days" class="w-3 h-3 lg:w-4 lg:h-4 text-gray-600 group-hover:text-accent"></i>
                             </div>
-                            <span class="text-[9px] lg:text-[10px] font-bold text-gray-400 uppercase tracking-wide group-hover:text-accent">Termin</span>
+                            <span class="text-[8px] lg:text-[9px] font-bold text-gray-400 uppercase tracking-wide group-hover:text-accent">Termin</span>
                         </button>
 
                         <!-- Button 3: Social Media -->
-                        <button onclick="setScenario('social')" id="btn-social" class="group relative w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white border-2 border-gray-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-offset-4 ring-transparent transform hover:-translate-y-1">
-                            <div class="absolute -top-1 -right-1 bg-accent text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10">NEU</div>
-                            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gray-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
-                                <i data-lucide="instagram" class="w-4 h-4 lg:w-5 lg:h-5 text-gray-600 group-hover:text-accent"></i>
+                        <button onclick="setScenario('social')" id="btn-social" class="animate-float-gentle group relative w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white border-2 border-gray-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-0.5 ring-offset-4 ring-transparent" style="animation-delay: 2s;">
+                            <div class="absolute -top-1 -right-1 bg-accent text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow-sm z-10">NEU</div>
+                            <div class="w-6 h-6 lg:w-8 lg:h-8 bg-gray-50 rounded-full flex items-center justify-center mb-0.5 transition-transform group-hover:scale-110">
+                                <i data-lucide="instagram" class="w-3 h-3 lg:w-4 lg:h-4 text-gray-600 group-hover:text-accent"></i>
                             </div>
-                            <span class="text-[9px] lg:text-[10px] font-bold text-gray-400 uppercase tracking-wide group-hover:text-accent">Social</span>
+                            <span class="text-[8px] lg:text-[9px] font-bold text-gray-400 uppercase tracking-wide group-hover:text-accent">Social</span>
                         </button>
                     </div>
 
-                    <!-- Dynamic Description Text (From Old HTML) -->
-                    <div id="scenario-content" class="bg-blue-50/50 rounded-3xl p-6 lg:p-8 border border-blue-100 min-h-[200px] transition-all duration-500 relative">
-                        <div class="absolute top-0 left-8 -translate-y-1/2 bg-white px-4 py-1 rounded-full border border-blue-100 text-xs font-bold text-primary shadow-sm uppercase tracking-wider">
-                            Der Workflow
+                    <!-- Dynamic Description Text -->
+                    <!-- GEÄNDERT: Min-Height reduziert und Padding angepasst für Kompaktheit -->
+                    <div id="scenario-content" class="bg-blue-50/50 rounded-2xl p-5 lg:p-6 border border-blue-100 min-h-[140px] transition-all duration-500 relative">
+                        <div class="absolute top-0 left-6 -translate-y-1/2 bg-white px-3 py-0.5 rounded-full border border-blue-100 text-[10px] font-bold text-primary shadow-sm uppercase tracking-wider">
+                            Der Ablauf
                         </div>
-                        <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-                            <span class="bg-yellow-100 p-2 rounded-lg"><i data-lucide="star" class="w-6 h-6 text-yellow-600 fill-yellow-600"></i></span>
+                        <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                            <span class="bg-yellow-100 p-1.5 rounded-lg"><i data-lucide="star" class="w-5 h-5 text-yellow-600 fill-yellow-600"></i></span>
                             Bewertungs-Autopilot
                         </h3>
-                        <div class="text-sm lg:text-base text-gray-600 leading-relaxed space-y-3">
-                            <div class="flex gap-3">
+                        <div class="text-xs lg:text-sm text-gray-600 leading-relaxed space-y-2">
+                            <div class="flex gap-2">
                                 <span class="font-bold text-primary">1.</span>
                                 <p>Prüfung bestanden! 🎉 Das System erkennt den Erfolg automatisch.</p>
                             </div>
-                            <div class="flex gap-3">
+                            <div class="flex gap-2">
                                 <span class="font-bold text-primary">2.</span>
                                 <p>2 Stunden später erhält der Schüler automatisch eine freundliche WhatsApp mit dem Bewertungslink.</p>
                             </div>
-                            <div class="flex gap-3">
+                            <div class="flex gap-2">
                                 <span class="font-bold text-primary">3.</span>
                                 <p>Das System erinnert höflich daran, falls vergessen. <strong>Ergebnis: 90% mehr Bewertungen.</strong></p>
                             </div>
                         </div>
-                        
-                        <!-- NEU: Statische Ergebnis-Box von Anfang an sichtbar -->
-                        <div class="mt-6 bg-white border border-green-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                    </div>
+
+                    <!-- NEU: Leerer Container für Ergebnis-Box auf der LINKEN Seite (für alle Szenarien jetzt!) -->
+                    <div id="left-result-container" class="transition-all duration-500">
+                        <!-- Statischer Inhalt für initialen Load (Bewertungs-Autopilot) -->
+                        <div class="bg-white border border-green-100 rounded-2xl p-4 lg:p-5 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
                             
-                            <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-3 relative z-10">
-                                <div class="p-2 bg-green-100 rounded-lg shadow-sm">
-                                    <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
+                            <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-3 relative z-10 text-sm lg:text-base">
+                                <div class="p-1.5 bg-green-100 rounded-lg shadow-sm">
+                                    <i data-lucide="trending-up" class="w-4 h-4 text-green-600"></i>
                                 </div>
                                 Dein Ergebnis:
                             </h4>
                             
-                            <ul class="space-y-3 text-sm text-gray-600 relative z-10">
+                            <ul class="space-y-2 text-xs lg:text-sm text-gray-600 relative z-10">
                                 <li class="flex items-start gap-3">
-                                    <div class="mt-0.5 min-w-[24px] h-6 bg-yellow-50 rounded-md flex items-center justify-center border border-yellow-100">
-                                        <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-500 fill-yellow-500"></i>
+                                    <div class="mt-0.5 min-w-[20px] h-5 bg-yellow-50 rounded-md flex items-center justify-center border border-yellow-100">
+                                        <i data-lucide="star" class="w-3 h-3 text-yellow-500 fill-yellow-500"></i>
                                     </div>
                                     <span><strong>30-50 neue Bewertungen/Jahr</strong> (statt 3-5)</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="mt-0.5 min-w-[24px] h-6 bg-blue-50 rounded-md flex items-center justify-center border border-blue-100">
-                                        <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-blue-500"></i>
+                                    <div class="mt-0.5 min-w-[20px] h-5 bg-blue-50 rounded-md flex items-center justify-center border border-blue-100">
+                                        <i data-lucide="bar-chart-2" class="w-3 h-3 text-blue-500"></i>
                                     </div>
                                     <span>Von <strong>4,2★ auf 4,8★</strong> in 6-12 Monaten</span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="mt-0.5 min-w-[24px] h-6 bg-indigo-50 rounded-md flex items-center justify-center border border-indigo-100">
-                                        <i data-lucide="search" class="w-3.5 h-3.5 text-indigo-500"></i>
+                                    <div class="mt-0.5 min-w-[20px] h-5 bg-indigo-50 rounded-md flex items-center justify-center border border-indigo-100">
+                                        <i data-lucide="search" class="w-3 h-3 text-indigo-500"></i>
                                     </div>
                                     <span>Besseres <strong>Google-Ranking</strong></span>
                                 </li>
                                 <li class="flex items-start gap-3">
-                                    <div class="mt-0.5 min-w-[24px] h-6 bg-green-50 rounded-md flex items-center justify-center border border-green-100">
-                                        <i data-lucide="coins" class="w-3.5 h-3.5 text-green-600"></i>
+                                    <div class="mt-0.5 min-w-[20px] h-5 bg-green-50 rounded-md flex items-center justify-center border border-green-100">
+                                        <i data-lucide="coins" class="w-3 h-3 text-green-600"></i>
                                     </div>
                                     <span>10-15 zusätzliche Schüler = <strong class="text-green-700">20.000-30.000€ Mehrumsatz</strong></span>
                                 </li>
@@ -900,24 +925,24 @@
 
                     <!-- Input & Action -->
                     <!-- HIER WURDE DIE ID "demo-controls" HINZUGEFÜGT -->
-                    <div id="demo-controls" class="bg-white p-4 lg:p-6 rounded-2xl border border-gray-200 shadow-sm relative">
-                        <div class="mb-4">
-                            <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Simuliere einen Schüler</label>
-                            <div class="flex items-center gap-3">
+                    <div id="demo-controls" class="bg-white p-4 lg:p-5 rounded-2xl border border-gray-200 shadow-sm relative">
+                        <div class="mb-3">
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">Simuliere einen Schüler</label>
+                            <div class="flex items-center gap-2">
                                 <input 
                                     type="text" 
                                     id="demo-name" 
                                     placeholder="Name (z.B. Lukas)" 
                                     value="Lukas"
-                                    class="flex-1 px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition text-textDark font-medium"
+                                    class="flex-1 px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition text-textDark font-medium text-sm"
                                 >
                                 <input type="hidden" id="demo-scenario" value="passed">
                                 
                                 <button 
                                     id="generate-btn"
                                     onclick="generateAIMessage()" 
-                                    class="bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-primaryDark transition shadow-lg hover:shadow-primary/30 flex items-center justify-center gap-2 group whitespace-nowrap">
-                                    <i data-lucide="play" class="w-5 h-5 fill-current"></i>
+                                    class="bg-primary text-white px-4 py-2.5 rounded-xl font-bold hover:bg-primaryDark transition shadow-lg hover:shadow-primary/30 flex items-center justify-center gap-1.5 group whitespace-nowrap text-sm">
+                                    <i data-lucide="play" class="w-4 h-4 fill-current"></i>
                                     Demo starten
                                 </button>
                             </div>
@@ -928,75 +953,77 @@
                 <!-- Right: Phone Mockup -->
                 <div class="relative w-full max-w-sm mx-auto lg:mr-0 order-1 lg:order-2">
                     <!-- iPhone Frame -->
-                    <div class="relative bg-gray-900 rounded-[2.5rem] lg:rounded-[3rem] p-2 lg:p-3 shadow-2xl border-4 border-gray-800">
-                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 lg:w-32 h-5 lg:h-6 bg-gray-800 rounded-b-xl z-20"></div>
+                    <!-- GEÄNDERT: Kompakteres Gehäuse -->
+                    <div class="relative bg-gray-900 rounded-[2rem] lg:rounded-[2.5rem] p-2 shadow-2xl border-4 border-gray-800">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-4 bg-gray-800 rounded-b-lg z-20"></div>
                         
                         <!-- Screen -->
-                        <div class="bg-white rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden h-[500px] sm:h-[550px] lg:h-[600px] flex flex-col relative">
+                        <!-- GEÄNDERT: Höhe massiv angepasst für Laptops: h-[420px] -->
+                        <div class="bg-white rounded-[1.5rem] lg:rounded-[2rem] overflow-hidden h-[420px] sm:h-[480px] lg:h-[540px] flex flex-col relative">
                             <!-- Status Bar -->
-                            <div class="bg-white/90 backdrop-blur-sm px-6 pt-4 pb-2 flex items-center justify-between text-xs text-gray-800 z-20 absolute top-0 w-full">
+                            <div class="bg-white/90 backdrop-blur-sm px-5 pt-3 pb-1 flex items-center justify-between text-[10px] text-gray-800 z-20 absolute top-0 w-full">
                                 <span class="font-medium">9:41</span>
                                 <div class="flex items-center gap-1">
-                                    <i data-lucide="signal" class="w-3 h-3"></i>
-                                    <i data-lucide="wifi" class="w-3 h-3"></i>
-                                    <i data-lucide="battery-full" class="w-3 h-3"></i>
+                                    <i data-lucide="signal" class="w-2.5 h-2.5"></i>
+                                    <i data-lucide="wifi" class="w-2.5 h-2.5"></i>
+                                    <i data-lucide="battery-full" class="w-2.5 h-2.5"></i>
                                 </div>
                             </div>
                             
                             <!-- WhatsApp Header -->
-                            <div id="wa-header" class="bg-[#075E54] px-4 pt-12 pb-3 flex items-center gap-3 text-white shadow-md z-10 transition-opacity duration-300">
-                                <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                                <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                            <div id="wa-header" class="bg-[#075E54] px-3 pt-10 pb-2 flex items-center gap-2 text-white shadow-md z-10 transition-opacity duration-300">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-white font-bold text-xs">
                                     FS
                                 </div>
                                 <div class="flex-1">
-                                    <div class="font-bold text-sm">Fahrschule Markus</div>
-                                    <div class="text-xs text-green-100">Retina Flow Bot</div>
+                                    <div class="font-bold text-xs">Fahrschule Markus</div>
+                                    <div class="text-[10px] text-green-100">Retina Flow Bot</div>
                                 </div>
-                                <i data-lucide="video" class="w-5 h-5 opacity-80"></i>
-                                <i data-lucide="phone" class="w-5 h-5 opacity-80"></i>
+                                <i data-lucide="video" class="w-4 h-4 opacity-80"></i>
+                                <i data-lucide="phone" class="w-4 h-4 opacity-80"></i>
                             </div>
 
                             <!-- Instagram Header (Hidden by default) -->
-                            <div id="ig-header" class="hidden bg-white px-4 pt-12 pb-3 flex items-center justify-between border-b border-gray-100 z-10 transition-opacity duration-300">
-                                <i data-lucide="arrow-left" class="w-6 h-6 text-black"></i>
+                            <div id="ig-header" class="hidden bg-white px-3 pt-10 pb-2 flex items-center justify-between border-b border-gray-100 z-10 transition-opacity duration-300">
+                                <i data-lucide="arrow-left" class="w-5 h-5 text-black"></i>
                                 <div class="text-center">
-                                    <div class="font-bold text-xs text-gray-500 uppercase tracking-wide">Beiträge</div>
-                                    <div class="font-bold text-sm text-black">fahrschule_markus</div>
+                                    <div class="font-bold text-[10px] text-gray-500 uppercase tracking-wide">Beiträge</div>
+                                    <div class="font-bold text-xs text-black">fahrschule_markus</div>
                                 </div>
-                                <i data-lucide="more-horizontal" class="w-6 h-6 text-black"></i>
+                                <i data-lucide="more-horizontal" class="w-5 h-5 text-black"></i>
                             </div>
 
                             <!-- Chat Area (WhatsApp) -->
-                            <div class="bg-[#ECE5DD] flex-1 p-4 overflow-y-auto relative transition-all duration-300" id="chat-container">
+                            <div class="bg-[#ECE5DD] flex-1 p-3 overflow-y-auto relative transition-all duration-300" id="chat-container">
                                 <!-- Chat Background Pattern -->
-                                <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: 400px;"></div>
+                                <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: 300px;"></div>
                                 
-                                <div class="relative z-10 flex flex-col gap-4 pt-2">
-                                    <div class="flex justify-center mb-4">
-                                        <span class="bg-[#DCE1E6] text-gray-600 text-[10px] font-bold px-2 py-1 rounded shadow-sm">HEUTE</span>
+                                <div class="relative z-10 flex flex-col gap-3 pt-1">
+                                    <div class="flex justify-center mb-2">
+                                        <span class="bg-[#DCE1E6] text-gray-600 text-[9px] font-bold px-1.5 py-0.5 rounded shadow-sm">HEUTE</span>
                                     </div>
 
                                     <!-- Static Welcome Message -->
-                                    <div class="gemini-glow-container bg-white p-3 rounded-lg rounded-tl-none shadow-sm text-sm text-gray-800 max-w-[85%] self-start relative border border-gray-100">
-                                        <p class="leading-relaxed relative z-10">Hey! 👋 Ich bin dein Retina Flow Assistent. Wähle links einen Modus aus, um zu sehen, wie ich arbeite.</p>
-                                        <div class="text-[9px] text-gray-400 text-right mt-1 flex justify-end gap-1 items-center relative z-10">
-                                            09:41 <i data-lucide="check-check" class="w-3 h-3 text-blue-400"></i>
+                                    <div class="gemini-glow-container bg-white p-2.5 rounded-lg rounded-tl-none shadow-sm text-xs text-gray-800 max-w-[85%] self-start relative border border-gray-100">
+                                        <p class="leading-relaxed relative z-10">Hey! 👋 Ich bin dein Retina Flow Assistent. Wähle links einen Modus aus.</p>
+                                        <div class="text-[8px] text-gray-400 text-right mt-0.5 flex justify-end gap-1 items-center relative z-10">
+                                            09:41 <i data-lucide="check-check" class="w-2.5 h-2.5 text-blue-400"></i>
                                         </div>
                                     </div>
 
                                     <!-- Placeholder -->
-                                    <div id="demo-placeholder" class="text-center py-10 opacity-50">
-                                        <i data-lucide="message-square-dashed" class="w-12 h-12 text-gray-400 mx-auto mb-2"></i>
-                                        <p class="text-xs text-gray-500">Warte auf Demo-Start...</p>
+                                    <div id="demo-placeholder" class="text-center py-6 opacity-50">
+                                        <i data-lucide="message-square-dashed" class="w-8 h-8 text-gray-400 mx-auto mb-1"></i>
+                                        <p class="text-[10px] text-gray-500">Warte auf Demo-Start...</p>
                                     </div>
 
                                     <!-- Loading Indicator -->
-                                    <div id="ai-loading" class="hidden bg-white p-3 rounded-lg rounded-tl-none shadow-sm w-16 self-start">
+                                    <div id="ai-loading" class="hidden bg-white p-2.5 rounded-lg rounded-tl-none shadow-sm w-12 self-start">
                                         <div class="flex gap-1 justify-center">
-                                            <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
-                                            <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                                            <div class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+                                            <div class="w-1 h-1 bg-gray-400 rounded-full animate-bounce"></div>
+                                            <div class="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                                            <div class="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1005,81 +1032,82 @@
                             <!-- Instagram Feed (Hidden by default) -->
                             <div id="ig-feed" class="hidden bg-white flex-1 overflow-y-auto relative no-scrollbar transition-all duration-300">
                                 <!-- Loading State IG -->
-                                <div id="ig-loading" class="hidden h-full flex flex-col items-center justify-center p-8 text-center absolute inset-0 bg-white z-20">
-                                    <div class="w-12 h-12 border-4 border-gray-100 border-t-accent rounded-full animate-spin mb-4"></div>
-                                    <p class="text-gray-500 font-medium text-sm animate-pulse">KI generiert Bild & Text...</p>
+                                <div id="ig-loading" class="hidden h-full flex flex-col items-center justify-center p-6 text-center absolute inset-0 bg-white z-20">
+                                    <div class="w-8 h-8 border-4 border-gray-100 border-t-accent rounded-full animate-spin mb-3"></div>
+                                    <p class="text-gray-500 font-medium text-xs animate-pulse">KI generiert Bild & Text...</p>
                                 </div>
 
                                 <!-- IG Post Content -->
-                                <div id="ig-post-content" class="hidden pb-20 opacity-0 transition-opacity duration-500">
+                                <div id="ig-post-content" class="hidden pb-16 opacity-0 transition-opacity duration-500">
                                     <!-- Post Header -->
-                                    <div class="flex items-center justify-between p-3">
+                                    <div class="flex items-center justify-between p-2">
                                         <div class="flex items-center gap-2">
-                                            <div class="w-8 h-8 bg-gradient-to-tr from-yellow-400 to-purple-600 p-[2px] rounded-full">
-                                                <div class="w-full h-full bg-white rounded-full p-[2px]">
+                                            <div class="w-7 h-7 bg-gradient-to-tr from-yellow-400 to-purple-600 p-[1.5px] rounded-full">
+                                                <div class="w-full h-full bg-white rounded-full p-[1.5px]">
                                                     <div class="w-full h-full bg-gray-200 rounded-full overflow-hidden">
                                                          <!-- Profile Avatar -->
-                                                         <div class="w-full h-full bg-primary flex items-center justify-center text-white text-[10px] font-bold">FS</div>
+                                                         <div class="w-full h-full bg-primary flex items-center justify-center text-white text-[8px] font-bold">FS</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <span class="font-bold text-sm text-gray-900">fahrschule_markus</span>
+                                            <span class="font-bold text-xs text-gray-900">fahrschule_markus</span>
                                         </div>
-                                        <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-600"></i>
+                                        <i data-lucide="more-horizontal" class="w-4 h-4 text-gray-600"></i>
                                     </div>
 
                                     <!-- Post Image -->
-                                    <div class="relative w-full h-72 bg-gray-100 overflow-hidden">
+                                    <!-- GEÄNDERT: Höhe weiter reduziert für kompakten Look: h-56 -->
+                                    <div class="relative w-full h-56 bg-gray-100 overflow-hidden">
                                          <!-- Bilddatei -->
                                          <img src="WhatsApp Image 2025-11-12 at 23.40.55.jpeg" alt="Führerschein bestanden" class="w-full h-full object-cover">
                                          
                                          <!-- Animated Like Heart (hidden initially) -->
                                          <div id="like-animation" class="absolute inset-0 flex items-center justify-center opacity-0 transform scale-0 transition-all duration-500">
-                                            <i data-lucide="heart" class="w-24 h-24 text-white fill-white drop-shadow-lg"></i>
+                                            <i data-lucide="heart" class="w-20 h-20 text-white fill-white drop-shadow-lg"></i>
                                          </div>
                                     </div>
 
                                     <!-- Actions -->
-                                    <div class="p-3">
-                                        <div class="flex items-center justify-between mb-3">
-                                            <div class="flex items-center gap-4">
-                                                <i data-lucide="heart" class="w-6 h-6 text-black hover:text-red-500 transition cursor-pointer" id="ig-heart-btn"></i>
-                                                <i data-lucide="message-circle" class="w-6 h-6 text-black -rotate-90"></i>
-                                                <i data-lucide="send" class="w-6 h-6 text-black"></i>
+                                    <div class="p-2">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center gap-3">
+                                                <i data-lucide="heart" class="w-5 h-5 text-black hover:text-red-500 transition cursor-pointer" id="ig-heart-btn"></i>
+                                                <i data-lucide="message-circle" class="w-5 h-5 text-black -rotate-90"></i>
+                                                <i data-lucide="send" class="w-5 h-5 text-black"></i>
                                             </div>
-                                            <i data-lucide="bookmark" class="w-6 h-6 text-black"></i>
+                                            <i data-lucide="bookmark" class="w-5 h-5 text-black"></i>
                                         </div>
                                         
-                                        <div class="font-bold text-sm mb-2 text-gray-900">Gefällt 42 Mal</div>
+                                        <div class="font-bold text-xs mb-1 text-gray-900">Gefällt 42 Mal</div>
                                         
-                                        <div class="text-sm leading-snug">
+                                        <div class="text-xs leading-snug">
                                             <span class="font-bold mr-1 text-gray-900">fahrschule_markus</span>
                                             <span id="ig-caption-text" class="text-gray-800"></span>
                                         </div>
                                         
-                                        <div class="text-[10px] text-gray-400 mt-2 uppercase">VOR 2 MINUTEN</div>
+                                        <div class="text-[9px] text-gray-400 mt-1 uppercase">VOR 2 MINUTEN</div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Input Area (WhatsApp) -->
-                            <div id="wa-input" class="bg-[#F0F2F5] px-3 py-2 flex items-center gap-2 border-t border-gray-200 z-10 transition-all duration-300">
-                                <i data-lucide="plus" class="w-6 h-6 text-[#007AFF]"></i>
-                                <div class="flex-1 bg-white px-4 py-2 rounded-full border border-gray-200 flex items-center justify-between">
-                                    <span class="text-gray-400 text-sm">Nachricht</span>
-                                    <i data-lucide="sticky-note" class="w-5 h-5 text-gray-400"></i>
+                            <div id="wa-input" class="bg-[#F0F2F5] px-2 py-2 flex items-center gap-2 border-t border-gray-200 z-10 transition-all duration-300">
+                                <i data-lucide="plus" class="w-5 h-5 text-[#007AFF]"></i>
+                                <div class="flex-1 bg-white px-3 py-1.5 rounded-full border border-gray-200 flex items-center justify-between">
+                                    <span class="text-gray-400 text-xs">Nachricht</span>
+                                    <i data-lucide="sticky-note" class="w-4 h-4 text-gray-400"></i>
                                 </div>
-                                <i data-lucide="camera" class="w-6 h-6 text-[#007AFF]"></i>
-                                <i data-lucide="mic" class="w-6 h-6 text-[#007AFF]"></i>
+                                <i data-lucide="camera" class="w-5 h-5 text-[#007AFF]"></i>
+                                <i data-lucide="mic" class="w-5 h-5 text-[#007AFF]"></i>
                             </div>
                             
                             <!-- Instagram Bottom Nav (Hidden by default) -->
-                            <div id="ig-nav" class="hidden bg-white px-6 py-3 flex items-center justify-between border-t border-gray-100 z-10">
-                                <i data-lucide="home" class="w-6 h-6 text-black"></i>
-                                <i data-lucide="search" class="w-6 h-6 text-gray-400"></i>
-                                <div class="w-6 h-6 border-2 border-black rounded-md flex items-center justify-center"><i data-lucide="plus" class="w-4 h-4 text-black"></i></div>
-                                <i data-lucide="heart" class="w-6 h-6 text-gray-400"></i>
-                                <div class="w-6 h-6 bg-gray-200 rounded-full"></div>
+                            <div id="ig-nav" class="hidden bg-white px-5 py-2.5 flex items-center justify-between border-t border-gray-100 z-10">
+                                <i data-lucide="home" class="w-5 h-5 text-black"></i>
+                                <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                                <div class="w-5 h-5 border-2 border-black rounded-md flex items-center justify-center"><i data-lucide="plus" class="w-3 h-3 text-black"></i></div>
+                                <i data-lucide="heart" class="w-5 h-5 text-gray-400"></i>
+                                <div class="w-5 h-5 bg-gray-200 rounded-full"></div>
                             </div>
                         </div>
                     </div>
@@ -1884,7 +1912,7 @@
                 const label = btn.querySelector('span');
                 
                 if (btnId === id) {
-                    btn.classList.add('ring-2', 'ring-accent', 'scale-105', 'border-accent');
+                    btn.classList.add('ring-2', 'ring-accent', 'scale-105', 'border-accent', 'active-pulse');
                     btn.classList.remove('ring-transparent', 'border-gray-100');
                     if(iconContainer !== btn) {
                         iconContainer.classList.remove('bg-gray-50');
@@ -1899,7 +1927,7 @@
                         label.classList.remove('text-gray-400');
                     }
                 } else {
-                    btn.classList.remove('ring-2', 'ring-accent', 'scale-105', 'border-accent');
+                    btn.classList.remove('ring-2', 'ring-accent', 'scale-105', 'border-accent', 'active-pulse');
                     btn.classList.add('ring-transparent', 'border-gray-100');
                     if(iconContainer !== btn) {
                         iconContainer.classList.add('bg-gray-50');
@@ -1921,25 +1949,21 @@
                 waHeader.classList.add('hidden');
                 chatContainer.classList.add('hidden');
                 waInput.classList.add('hidden');
-                if(demoControls) demoControls.classList.add('hidden'); // Controls ausblenden
+                if(demoControls) demoControls.classList.add('hidden');
                 
                 igHeader.classList.remove('hidden');
                 igFeed.classList.remove('hidden');
                 igNav.classList.remove('hidden');
 
-                // Sofortiger Inhalt für Social (Anna)
                 const igLoading = document.getElementById('ig-loading');
                 const igPostContent = document.getElementById('ig-post-content');
-                
                 igLoading.classList.add('hidden');
                 igPostContent.classList.remove('hidden');
                 
-                // Text für Anna setzen
                 const name = "Anna";
                 const caption = `Endlich geschafft! 🥳 ${name} hat den Führerschein in der Tasche! 🚗💨 Wir wünschen dir allzeit gute und sichere Fahrt. #Fahrschule #Bestanden #Freiheit #${name}OnTour`;
                 document.getElementById('ig-caption-text').textContent = caption;
 
-                // Einblenden erzwingen
                 setTimeout(() => {
                     igPostContent.classList.add('opacity-100');
                 }, 50);
@@ -1952,19 +1976,25 @@
                 waHeader.classList.remove('hidden');
                 chatContainer.classList.remove('hidden');
                 waInput.classList.remove('hidden');
-                if(demoControls) demoControls.classList.remove('hidden'); // Controls wieder einblenden
+                if(demoControls) demoControls.classList.remove('hidden');
             }
 
-            // Description Box Content Update
+            // Update Descriptions
             const content = scenarios[id];
             const contentDiv = document.getElementById('scenario-content');
+            const leftResultContainer = document.getElementById('left-result-container');
+
+            // Fade Out
             contentDiv.style.opacity = '0';
             contentDiv.style.transform = 'translateY(5px)';
+            leftResultContainer.style.opacity = '0';
+            leftResultContainer.style.transform = 'translateY(5px)';
             
             setTimeout(() => {
+                // Update Left Text
                 contentDiv.innerHTML = `
                     <div class="absolute top-0 left-8 -translate-y-1/2 bg-white px-4 py-1 rounded-full border border-blue-100 text-xs font-bold text-primary shadow-sm uppercase tracking-wider">
-                        Der Workflow
+                        Der Ablauf
                     </div>
                     <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                         <span class="${content.headerBg} p-2 rounded-lg"><i data-lucide="${content.icon}" class="w-6 h-6 ${content.iconClass}"></i></span>
@@ -1984,11 +2014,18 @@
                             <p>${content.steps[2]}</p>
                         </div>
                     </div>
-                    ${content.extraHtml ? content.extraHtml : ''}
                 `;
+                
+                // Update Left Result Box
+                leftResultContainer.innerHTML = content.extraHtml ? content.extraHtml : '';
+
                 lucide.createIcons();
+                
+                // Fade In
                 contentDiv.style.opacity = '1';
                 contentDiv.style.transform = 'translateY(0)';
+                leftResultContainer.style.opacity = '1';
+                leftResultContainer.style.transform = 'translateY(0)';
             }, 200);
         }
 
