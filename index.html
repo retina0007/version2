@@ -1059,7 +1059,7 @@
                                     <!-- GEÄNDERT: Höhe weiter reduziert für kompakten Look: h-56 -->
                                     <div class="relative w-full h-56 bg-gray-100 overflow-hidden">
                                          <!-- Bilddatei -->
-                                         <img src="WhatsApp Image 2025-11-12 at 23.40.55.jpeg" alt="Führerschein bestanden" class="w-full h-full object-cover">
+                                         <img src="social_post.jpeg" alt="Führerschein bestanden" class="w-full h-full object-cover">
                                          
                                          <!-- Animated Like Heart (hidden initially) -->
                                          <div id="like-animation" class="absolute inset-0 flex items-center justify-center opacity-0 transform scale-0 transition-all duration-500">
@@ -1494,7 +1494,7 @@
                 ],
                 // Premium Ergebnis-Box
                 extraHtml: `
-                    <div class="mt-6 bg-white border border-green-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                    <div class="bg-white border border-green-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group mt-4">
                         <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
                         
                         <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-3 relative z-10">
@@ -1545,7 +1545,7 @@
                 ],
                 // Premium Ergebnis-Box für Termin-Autopilot
                 extraHtml: `
-                    <div class="mt-6 bg-white border border-blue-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                    <div class="bg-white border border-blue-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group mt-4">
                         <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
 
                         <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-3 relative z-10">
@@ -1596,7 +1596,7 @@
                 ],
                 // Premium Ergebnis-Box für Social Media
                 extraHtml: `
-                    <div class="mt-6 bg-white border border-pink-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                    <div class="bg-white border border-pink-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group mt-4">
                         <div class="absolute top-0 right-0 w-24 h-24 bg-pink-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
 
                         <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-3 relative z-10">
@@ -2016,7 +2016,7 @@
                     </div>
                 `;
                 
-                // Update Left Result Box
+                // Update Left Result Box (always!)
                 leftResultContainer.innerHTML = content.extraHtml ? content.extraHtml : '';
 
                 lucide.createIcons();
