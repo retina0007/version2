@@ -29,6 +29,8 @@
                         primaryDark: '#1e40af',
                         accent: '#06B6D4',
                         accentHover: '#0891B2',
+                        gold: '#D4AF37',
+                        goldLight: '#F3E5AB',
                         bgLight: '#F6F4F4',
                         textDark: '#272525',
                         textGray: '#8B8B90',
@@ -41,7 +43,11 @@
                         'card-hover': '0 10px 30px rgba(5, 64, 173, 0.1)',
                         'float': '0 20px 40px -10px rgba(0,0,0,0.1)',
                         'glow': '0 10px 40px rgba(6, 182, 212, 0.3)',
+                        'gold': '0 10px 40px rgba(212, 175, 55, 0.2)',
                     },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #FFF8E1 0%, #FFFFFF 100%)',
+                    }
                 }
             }
         }
@@ -147,13 +153,32 @@
             animation: fadeInMsg 0.4s ease-out forwards;
         }
 
+        /* Gold Rain Animation */
+        @keyframes goldRain {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+        }
+        
+        .gold-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #FFD700 0%, #B8860B 100%);
+            border-radius: 50%;
+            top: -10px;
+            opacity: 0;
+            pointer-events: none;
+            animation: goldRain linear infinite;
+        }
+
         /* Bonus Banner Pulse */
         @keyframes bonus-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.01); }
+            0%, 100% { transform: scale(1); border-color: #D4AF37; }
+            50% { transform: scale(1.005); border-color: #FFD700; }
         }
         .bonus-pulse {
-            animation: bonus-pulse 3s ease-in-out infinite;
+            animation: bonus-pulse 4s ease-in-out infinite;
         }
         
         /* Hide scrollbar for chat but keep functionality */
@@ -169,29 +194,29 @@
 <body class="font-sans text-textDark bg-white antialiased overflow-x-hidden">
 
     <!-- Navigation -->
-    <div class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+    <div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <nav class="pointer-events-auto bg-navBg nav-glass border border-white/60 shadow-float rounded-full pl-6 pr-2 py-2 flex items-center justify-between max-w-5xl w-full transition-all duration-300 hover:shadow-lg">
             <a href="#" class="flex items-center gap-2.5 mr-4 group">
-                <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-sm group-hover:scale-105 transition-transform">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
                     R
                 </div>
-                <span class="font-bold text-xl tracking-tight text-primary">Retina Flow</span>
+                <span class="font-bold text-lg tracking-tight text-primary">Retina Flow</span>
             </a>
             
             <!-- Center Menu with Floating Marker -->
             <div class="hidden md:flex items-center relative bg-gray-100/50 rounded-full p-1.5 border border-white/40">
                 <div id="nav-marker" class="absolute h-[calc(100%-10px)] top-[5px] rounded-full bg-primary shadow-md z-0 opacity-0"></div>
-                <a href="#start" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">Startseite</a>
-                <a href="#problems" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">Probleme</a>
-                <a href="#solutions" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">Lösungen</a>
-                <a href="#roi" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">Ersparnis</a>
-                <a href="#faq" class="nav-link relative z-10 px-5 py-2 text-sm font-medium text-textDark rounded-full">FAQ</a>
+                <a href="#start" class="nav-link relative z-10 px-4 py-1.5 text-sm font-medium text-textDark rounded-full">Start</a>
+                <a href="#problems" class="nav-link relative z-10 px-4 py-1.5 text-sm font-medium text-textDark rounded-full">Probleme</a>
+                <a href="#solutions" class="nav-link relative z-10 px-4 py-1.5 text-sm font-medium text-textDark rounded-full">Lösungen</a>
+                <a href="#roi" class="nav-link relative z-10 px-4 py-1.5 text-sm font-medium text-textDark rounded-full">Ersparnis</a>
+                <a href="#faq" class="nav-link relative z-10 px-4 py-1.5 text-sm font-medium text-textDark rounded-full">FAQ</a>
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-primary text-white px-6 py-3 rounded-full font-bold text-sm hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/20 flex items-center gap-2">
+                <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-primary text-white px-5 py-2.5 rounded-full font-bold text-xs hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/20 flex items-center gap-2">
                     Kostenlos starten 
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    <i data-lucide="arrow-right" class="w-3 h-3"></i>
                 </a>
                 <button id="mobile-menu-btn" class="md:hidden text-primary bg-gray-100 p-2 rounded-full hover:bg-gray-200 transition" aria-label="Menü öffnen">
                     <i data-lucide="menu" class="w-5 h-5"></i>
@@ -201,7 +226,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden fixed top-24 left-4 right-4 bg-white/95 backdrop-blur-xl shadow-2xl rounded-3xl p-6 z-40 border border-gray-100 transform transition-all duration-300 origin-top">
+    <div id="mobile-menu" class="hidden fixed top-20 left-4 right-4 bg-white/95 backdrop-blur-xl shadow-2xl rounded-3xl p-6 z-40 border border-gray-100 transform transition-all duration-300 origin-top">
         <div class="flex flex-col gap-3">
             <a href="#start" onclick="closeMenu()" class="text-textDark font-medium py-3 px-4 rounded-xl hover:bg-gray-50 transition">Startseite</a>
             <a href="#problems" onclick="closeMenu()" class="text-textDark font-medium py-3 px-4 rounded-xl hover:bg-gray-50 transition">Probleme</a>
@@ -211,69 +236,69 @@
         </div>
     </div>
 
-    <!-- Hero Section (Blue Design + New Content) -->
-    <section id="start" class="relative pt-36 pb-24 px-4 overflow-hidden bg-primary">
+    <!-- Hero Section (Optimized for Laptop View) -->
+    <section id="start" class="relative pt-28 pb-16 lg:pt-36 lg:pb-24 px-4 overflow-hidden bg-primary">
         <!-- Background Decor -->
         <div class="absolute top-0 right-0 w-2/3 h-full bg-white/5 skew-x-12 transform origin-top-right pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <!-- Left: New Content adapted to Blue Design -->
-                <div class="reveal space-y-8 text-white">
-                    <div class="inline-flex items-center gap-2 bg-blue-800/50 border border-blue-400/30 text-cyan-200 px-4 py-2 rounded-full text-sm font-medium">
+                <div class="reveal space-y-6 lg:space-y-8 text-white">
+                    <div class="inline-flex items-center gap-2 bg-blue-800/50 border border-blue-400/30 text-cyan-200 px-4 py-2 rounded-full text-xs lg:text-sm font-medium">
                         <i data-lucide="sparkles" class="w-4 h-4 text-accent"></i>
                         KI-gesteuerte Automatisierung
                     </div>
                     
-                    <h1 class="text-5xl lg:text-6xl font-bold leading-tight text-white">
+                    <h1 class="text-4xl lg:text-6xl font-bold leading-tight text-white">
                         Schluss mit dem<br>
                         <span class="text-accent">WhatsApp-Marathon</span>
                     </h1>
                     
-                    <p class="text-xl text-blue-100 leading-relaxed">
+                    <p class="text-lg lg:text-xl text-blue-100 leading-relaxed">
                         Automatische Terminkoordination und Bewertungs-Management – inklusive Social Media. Mit deiner bestehenden Software, ohne IT-Aufwand.
                     </p>
 
-                    <div class="space-y-4">
+                    <div class="space-y-3">
                         <div class="flex items-start gap-3">
                             <div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5 border border-green-500/30">
                                 <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
                             </div>
-                            <span class="text-blue-50"><strong>8-12 Stunden pro Woche</strong> zurück für dein Kerngeschäft</span>
+                            <span class="text-blue-50 text-sm lg:text-base"><strong>8-12 Stunden pro Woche</strong> zurück für dein Kerngeschäft</span>
                         </div>
                         <div class="flex items-start gap-3">
                             <div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5 border border-green-500/30">
                                 <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
                             </div>
-                            <span class="text-blue-50"><strong>4,8★ Google-Bewertung</strong> durch automatische Review-Anfragen</span>
+                            <span class="text-blue-50 text-sm lg:text-base"><strong>4,8★ Google-Bewertung</strong> durch automatische Review-Anfragen</span>
                         </div>
                         <div class="flex items-start gap-3">
                             <div class="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5 border border-green-500/30">
                                 <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
                             </div>
-                            <span class="text-blue-50"><strong>Social-Media-Autopilot inklusive</strong> <span class="text-xs bg-accent text-white px-2 py-0.5 rounded-full ml-1 font-bold">Bonus</span></span>
+                            <span class="text-blue-50 text-sm lg:text-base"><strong>Social-Media-Autopilot inklusive</strong> <span class="text-xs bg-accent text-white px-2 py-0.5 rounded-full ml-1 font-bold">Bonus</span></span>
                         </div>
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                        <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-accent text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-accentHover transition shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 inline-flex items-center justify-center gap-2 group">
+                        <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-accent text-white px-8 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-accentHover transition shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 inline-flex items-center justify-center gap-2 group">
                             Kostenloses Erstgespräch
                             <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <a href="#roi" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition inline-flex items-center justify-center gap-2">
+                        <a href="#roi" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full font-bold text-base lg:text-lg hover:bg-white/20 transition inline-flex items-center justify-center gap-2">
                             ROI berechnen
                             <i data-lucide="calculator" class="w-5 h-5"></i>
                         </a>
                     </div>
 
-                    <p class="text-sm text-blue-200 flex items-center gap-2 opacity-80">
+                    <p class="text-xs lg:text-sm text-blue-200 flex items-center gap-2 opacity-80">
                         <i data-lucide="shield-check" class="w-4 h-4 text-green-400"></i>
                         100% DSGVO-konform • Keine Vertragsbindung • 14 Tage Geld-zurück
                     </p>
                 </div>
 
                 <!-- Right: Dashboard Mockup -->
-                <div class="reveal relative lg:ml-10">
+                <div class="reveal relative lg:ml-10 hidden md:block">
                     <div class="relative w-full max-w-lg mx-auto lg:mr-0">
                         <div class="gemini-glow-container bg-white rounded-2xl shadow-2xl overflow-hidden relative z-10">
                             <div class="bg-gray-50 border-b border-gray-100 px-4 py-3 flex items-center justify-between">
@@ -290,7 +315,7 @@
                                 <div class="flex items-center justify-between bg-green-50 p-4 rounded-xl border border-green-100/50">
                                     <div class="flex items-center gap-3">
                                         <div class="bg-[#22C55E] text-white p-2 rounded-lg shadow-sm">
-                                            <i data-lucide="calendar" class="w-5 h-5"></i>
+                                            <i data-lucide="calendar-check-2" class="w-5 h-5"></i>
                                         </div>
                                         <div>
                                             <div class="font-bold text-gray-800 text-sm">Termin bestätigt</div>
@@ -342,61 +367,61 @@
     </section>
 
     <!-- Problem Section -->
-    <section id="problems" class="py-24 px-4 bg-white">
+    <section id="problems" class="py-16 lg:py-24 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6">Kennst du das?</h2>
-                <p class="text-xl text-textGray max-w-3xl mx-auto">
+            <div class="text-center mb-12 lg:mb-16 reveal">
+                <h2 class="text-3xl lg:text-5xl font-bold mb-4 lg:mb-6">Kennst du das?</h2>
+                <p class="text-lg lg:text-xl text-textGray max-w-3xl mx-auto">
                     Du führst eine moderne Fahrschule mit gutem Team und solider Ausstattung. Doch zwei wiederkehrende Herausforderungen kosten wertvolle Zeit:
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Problem 1: WhatsApp -->
-                <div class="reveal bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-2xl border-2 border-red-200 shadow-card hover:shadow-card-hover transition-all duration-300">
-                    <div class="w-14 h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="message-circle" class="w-7 h-7 text-red-600"></i>
+                <div class="reveal bg-gradient-to-br from-red-50 to-orange-50 p-6 lg:p-8 rounded-2xl border-2 border-red-200 shadow-card hover:shadow-card-hover transition-all duration-300">
+                    <div class="w-12 h-12 lg:w-14 lg:h-14 bg-red-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="message-square-warning" class="w-6 h-6 lg:w-7 lg:h-7 text-red-600"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-red-900">„Wann kannst du wieder?"</h3>
-                    <p class="text-textGray mb-6 leading-relaxed">
+                    <h3 class="text-xl lg:text-2xl font-bold mb-4 text-red-900">„Wann kannst du wieder?"</h3>
+                    <p class="text-textGray mb-6 leading-relaxed text-sm lg:text-base">
                         WhatsApp-Nachrichten laufen ununterbrochen ein. Du koordinierst Termine, beantwortest Fragen, und versuchst, allen gerecht zu werden. Doch das Handy läuft heiß – und du bist immer im Reaktionsmodus.
                     </p>
                     <div class="space-y-3">
                         <div class="flex items-start gap-3">
-                            <i data-lucide="x-circle" class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="ban" class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-red-800">8-12 Stunden pro Woche für manuelle Terminkoordination</span>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="x-circle" class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="ban" class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-red-800">Verzögerungen durch manuelles Hin-und-Her</span>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="x-circle" class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="ban" class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-red-800">Keine Zeit für strategische Geschäftsentwicklung</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Problem 2: Reviews -->
-                <div class="reveal bg-gradient-to-br from-yellow-50 to-amber-50 p-8 rounded-2xl border-2 border-yellow-200 shadow-card hover:shadow-card-hover transition-all duration-300">
-                    <div class="w-14 h-14 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6">
-                        <i data-lucide="star" class="w-7 h-7 text-yellow-600"></i>
+                <div class="reveal bg-gradient-to-br from-yellow-50 to-amber-50 p-6 lg:p-8 rounded-2xl border-2 border-yellow-200 shadow-card hover:shadow-card-hover transition-all duration-300">
+                    <div class="w-12 h-12 lg:w-14 lg:h-14 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="star-off" class="w-6 h-6 lg:w-7 lg:h-7 text-yellow-600"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-yellow-900">„Lass uns doch eine Bewertung da!"</h3>
-                    <p class="text-textGray mb-6 leading-relaxed">
+                    <h3 class="text-xl lg:text-2xl font-bold mb-4 text-yellow-900">„Lass uns doch eine Bewertung da!"</h3>
+                    <p class="text-textGray mb-6 leading-relaxed text-sm lg:text-base">
                         Du fragst nach Bewertungen – aber im Alltagsstress geht das unter. Ehemalige Fahrschüler vergessen es, und dein Google-Profil bleibt hinter dem der Konkurrenz zurück. Potenzielle Neukunden entscheiden sich für andere.
                     </p>
                     <div class="space-y-3">
                         <div class="flex items-start gap-3">
-                            <i data-lucide="x-circle" class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="ban" class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-yellow-900">Nur 1 von 10 zufriedenen Kunden hinterlässt eine Bewertung</span>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="x-circle" class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="ban" class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-yellow-900">4,2★ statt 4,8★ = 30% weniger Neukunden</span>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="x-circle" class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="ban" class="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-yellow-900">Manuelles Nachfragen ist zeitintensiv und fühlt sich unangenehm an</span>
                         </div>
                     </div>
@@ -404,31 +429,31 @@
             </div>
 
             <!-- Opportunity Card: Social Media -->
-            <div class="reveal mt-8 bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl border-2 border-blue-200 shadow-card hover:shadow-card-hover transition-all duration-300">
+            <div class="reveal mt-8 bg-gradient-to-br from-blue-50 to-purple-50 p-6 lg:p-8 rounded-2xl border-2 border-blue-200 shadow-card hover:shadow-card-hover transition-all duration-300">
                 <div class="flex flex-col md:flex-row items-start gap-6">
-                    <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="instagram" class="w-7 h-7 text-blue-600"></i>
+                    <div class="w-12 h-12 lg:w-14 lg:h-14 bg-blue-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="instagram" class="w-6 h-6 lg:w-7 lg:h-7 text-blue-600"></i>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-2xl font-bold mb-3 text-blue-900">Plus: Deine Erfolge sichtbar machen</h3>
-                        <p class="text-textGray mb-4 leading-relaxed">
+                        <h3 class="text-xl lg:text-2xl font-bold mb-3 text-blue-900">Plus: Deine Erfolge sichtbar machen</h3>
+                        <p class="text-textGray mb-4 leading-relaxed text-sm lg:text-base">
                             Jede bestandene Prüfung ist ein Erfolgsmoment – und perfekter Content für Instagram & Facebook. Doch wer hat schon Zeit, täglich Posts zu erstellen, zu designen und zu veröffentlichen? Mit dem Social-Media-Autopiloten wird das komplett automatisiert.
                         </p>
                         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
                             <div class="flex items-start gap-2">
-                                <i data-lucide="check-circle" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                                <i data-lucide="palette" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
                                 <span class="text-sm text-blue-900">Automatisches Branding</span>
                             </div>
                             <div class="flex items-start gap-2">
-                                <i data-lucide="check-circle" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                                <i data-lucide="calendar-clock" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
                                 <span class="text-sm text-blue-900">40-60 Posts pro Jahr</span>
                             </div>
                             <div class="flex items-start gap-2">
-                                <i data-lucide="check-circle" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                                <i data-lucide="hash" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
                                 <span class="text-sm text-blue-900">Logo, Text & Hashtags</span>
                             </div>
                             <div class="flex items-start gap-2">
-                                <i data-lucide="check-circle" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                                <i data-lucide="sparkles" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
                                 <span class="text-sm text-blue-900">Immer frischer Content</span>
                             </div>
                         </div>
@@ -439,16 +464,16 @@
     </section>
 
     <!-- Before/After Section -->
-    <section class="py-24 px-4 bg-gradient-to-br from-gray-50 via-blue-50 to-white">
+    <section class="py-16 lg:py-24 px-4 bg-gradient-to-br from-gray-50 via-blue-50 to-white">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6">Vorher vs. Nachher</h2>
-                <p class="text-xl text-textGray max-w-3xl mx-auto">
+            <div class="text-center mb-12 lg:mb-16 reveal">
+                <h2 class="text-3xl lg:text-5xl font-bold mb-4 lg:mb-6">Vorher vs. Nachher</h2>
+                <p class="text-lg lg:text-xl text-textGray max-w-3xl mx-auto">
                     So sieht dein Arbeitsalltag vor und nach Retina Flow aus
                 </p>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
                 <!-- BEFORE -->
                 <div class="reveal space-y-6">
                     <div class="inline-flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
@@ -457,9 +482,12 @@
                     </div>
                     
                     <div class="space-y-4">
-                        <div class="bg-white p-6 rounded-2xl border-2 border-red-100 shadow-card">
+                        <div class="bg-white p-5 lg:p-6 rounded-2xl border-2 border-red-100 shadow-card">
                             <div class="flex items-start gap-4">
-                                <div class="text-3xl">📱</div>
+                                <!-- GEÄNDERT: Premium Icon statt Emoji -->
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-red-50 rounded-xl flex items-center justify-center border border-red-100 shrink-0">
+                                    <i data-lucide="smartphone" class="w-5 h-5 lg:w-6 lg:h-6 text-red-600"></i>
+                                </div>
                                 <div>
                                     <h4 class="font-bold text-lg mb-2 text-red-900">Montag 08:00 Uhr</h4>
                                     <p class="text-textGray text-sm leading-relaxed">
@@ -469,9 +497,12 @@
                             </div>
                         </div>
 
-                        <div class="bg-white p-6 rounded-2xl border-2 border-red-100 shadow-card">
+                        <div class="bg-white p-5 lg:p-6 rounded-2xl border-2 border-red-100 shadow-card">
                             <div class="flex items-start gap-4">
-                                <div class="text-3xl">⏰</div>
+                                <!-- GEÄNDERT: Premium Icon statt Emoji -->
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-red-50 rounded-xl flex items-center justify-center border border-red-100 shrink-0">
+                                    <i data-lucide="hourglass" class="w-5 h-5 lg:w-6 lg:h-6 text-red-600"></i>
+                                </div>
                                 <div>
                                     <h4 class="font-bold text-lg mb-2 text-red-900">Mittag 12:30 Uhr</h4>
                                     <p class="text-textGray text-sm leading-relaxed">
@@ -481,9 +512,12 @@
                             </div>
                         </div>
 
-                        <div class="bg-white p-6 rounded-2xl border-2 border-red-100 shadow-card">
+                        <div class="bg-white p-5 lg:p-6 rounded-2xl border-2 border-red-100 shadow-card">
                             <div class="flex items-start gap-4">
-                                <div class="text-3xl">😓</div>
+                                <!-- GEÄNDERT: Premium Icon statt Emoji -->
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-red-50 rounded-xl flex items-center justify-center border border-red-100 shrink-0">
+                                    <i data-lucide="battery-warning" class="w-5 h-5 lg:w-6 lg:h-6 text-red-600"></i>
+                                </div>
                                 <div>
                                     <h4 class="font-bold text-lg mb-2 text-red-900">Abend 19:00 Uhr</h4>
                                     <p class="text-textGray text-sm leading-relaxed">
@@ -512,14 +546,17 @@
                 <!-- AFTER -->
                 <div class="reveal space-y-6">
                     <div class="inline-flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 px-4 py-2 rounded-full text-sm font-bold mb-4">
-                        <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        <i data-lucide="check-circle-2" class="w-4 h-4"></i>
                         NACHHER
                     </div>
                     
                     <div class="space-y-4">
-                        <div class="bg-white p-6 rounded-2xl border-2 border-green-100 shadow-card">
+                        <div class="bg-white p-5 lg:p-6 rounded-2xl border-2 border-green-100 shadow-card">
                             <div class="flex items-start gap-4">
-                                <div class="text-3xl">☕</div>
+                                <!-- GEÄNDERT: Premium Icon statt Emoji -->
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-green-50 rounded-xl flex items-center justify-center border border-green-100 shrink-0">
+                                    <i data-lucide="coffee" class="w-5 h-5 lg:w-6 lg:h-6 text-green-600"></i>
+                                </div>
                                 <div>
                                     <h4 class="font-bold text-lg mb-2 text-green-900">Montag 08:00 Uhr</h4>
                                     <p class="text-textGray text-sm leading-relaxed">
@@ -529,9 +566,12 @@
                             </div>
                         </div>
 
-                        <div class="bg-white p-6 rounded-2xl border-2 border-green-100 shadow-card">
+                        <div class="bg-white p-5 lg:p-6 rounded-2xl border-2 border-green-100 shadow-card">
                             <div class="flex items-start gap-4">
-                                <div class="text-3xl">🎯</div>
+                                <!-- GEÄNDERT: Premium Icon statt Emoji -->
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-green-50 rounded-xl flex items-center justify-center border border-green-100 shrink-0">
+                                    <i data-lucide="pie-chart" class="w-5 h-5 lg:w-6 lg:h-6 text-green-600"></i>
+                                </div>
                                 <div>
                                     <h4 class="font-bold text-lg mb-2 text-green-900">Mittag 12:30 Uhr</h4>
                                     <p class="text-textGray text-sm leading-relaxed">
@@ -541,9 +581,12 @@
                             </div>
                         </div>
 
-                        <div class="bg-white p-6 rounded-2xl border-2 border-green-100 shadow-card">
+                        <div class="bg-white p-5 lg:p-6 rounded-2xl border-2 border-green-100 shadow-card">
                             <div class="flex items-start gap-4">
-                                <div class="text-3xl">⭐</div>
+                                <!-- GEÄNDERT: Premium Icon statt Emoji -->
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-green-50 rounded-xl flex items-center justify-center border border-green-100 shrink-0">
+                                    <i data-lucide="star" class="w-5 h-5 lg:w-6 lg:h-6 text-green-600"></i>
+                                </div>
                                 <div>
                                     <h4 class="font-bold text-lg mb-2 text-green-900">Abend 19:00 Uhr</h4>
                                     <p class="text-textGray text-sm leading-relaxed">
@@ -573,44 +616,44 @@
     </section>
 
     <!-- Product Overview Section -->
-    <section id="solutions" class="py-24 px-4 bg-gradient-to-br from-primary via-blue-700 to-blue-900 text-white relative overflow-hidden">
+    <section id="solutions" class="py-16 lg:py-24 px-4 bg-gradient-to-br from-primary via-blue-700 to-blue-900 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
             <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-300 rounded-full blur-3xl"></div>
         </div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6">Die Lösung: Retina Flow</h2>
-                <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+            <div class="text-center mb-12 lg:mb-16 reveal">
+                <h2 class="text-3xl lg:text-5xl font-bold mb-4 lg:mb-6">Die Lösung: Retina Flow</h2>
+                <p class="text-lg lg:text-xl text-blue-100 max-w-3xl mx-auto">
                     Zwei leistungsstarke Autopiloten für dein Kerngeschäft – plus Social Media als Bonus
                 </p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-8 mb-12">
                 <!-- Modul 1: Bewertungs-Autopilot (LEAD) -->
-                <div class="reveal bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-2xl shadow-2xl hover:bg-white/15 transition-all duration-300">
+                <div class="reveal bg-white/10 backdrop-blur-sm border border-white/20 p-6 lg:p-8 rounded-2xl shadow-2xl hover:bg-white/15 transition-all duration-300">
                     <div class="flex items-start justify-between mb-6">
-                        <div class="w-14 h-14 bg-yellow-400 rounded-2xl flex items-center justify-center">
-                            <i data-lucide="star" class="w-7 h-7 text-yellow-900"></i>
+                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-yellow-400 rounded-2xl flex items-center justify-center">
+                            <i data-lucide="trophy" class="w-6 h-6 lg:w-7 lg:h-7 text-yellow-900"></i>
                         </div>
                         <span class="bg-green-400 text-green-900 px-3 py-1 rounded-full text-xs font-bold">LEAD-PRODUKT</span>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Bewertungs-Autopilot</h3>
-                    <p class="text-blue-100 mb-6 leading-relaxed">
+                    <p class="text-blue-100 mb-6 leading-relaxed text-sm lg:text-base">
                         Automatische Google-Bewertungsanfragen direkt nach bestandener Prüfung. Steigere dein Rating von 4,2★ auf 4,8★ und gewinne 30% mehr Neukunden.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-blue-100">Automatischer WhatsApp-Versand mit Bewertungslink</span>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-blue-100">Perfektes Timing: Direkt nach der bestandenen Prüfung</span>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-blue-100">10x höhere Bewertungsrate als manuelles Nachfragen</span>
                         </div>
                     </div>
@@ -624,28 +667,28 @@
                 </div>
 
                 <!-- Modul 2: Termin-Autopilot (SECOND) -->
-                <div class="reveal bg-white/10 backdrop-blur-sm border border-white/20 p-8 rounded-2xl shadow-2xl hover:bg-white/15 transition-all duration-300">
+                <div class="reveal bg-white/10 backdrop-blur-sm border border-white/20 p-6 lg:p-8 rounded-2xl shadow-2xl hover:bg-white/15 transition-all duration-300">
                     <div class="flex items-start justify-between mb-6">
-                        <div class="w-14 h-14 bg-blue-400 rounded-2xl flex items-center justify-center">
-                            <i data-lucide="calendar" class="w-7 h-7 text-blue-900"></i>
+                        <div class="w-12 h-12 lg:w-14 lg:h-14 bg-blue-400 rounded-2xl flex items-center justify-center">
+                            <i data-lucide="calendar-days" class="w-6 h-6 lg:w-7 lg:h-7 text-blue-900"></i>
                         </div>
                         <span class="bg-blue-400 text-blue-900 px-3 py-1 rounded-full text-xs font-bold">ZEITSPARER</span>
                     </div>
                     <h3 class="text-2xl font-bold mb-4">Termin-Autopilot</h3>
-                    <p class="text-blue-100 mb-6 leading-relaxed">
+                    <p class="text-blue-100 mb-6 leading-relaxed text-sm lg:text-base">
                         KI-gesteuerte Terminkoordination via WhatsApp. Spare 8-12 Stunden pro Woche und konzentriere dich auf dein Kerngeschäft.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-blue-100">Automatische Antwort auf WhatsApp-Anfragen 24/7</span>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-blue-100">Intelligente Terminverteilung nach Fahrlehrerauslastung</span>
                         </div>
                         <div class="flex items-start gap-3">
-                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5"></i>
                             <span class="text-sm text-blue-100">Sync mit deiner bestehenden Software (Fahren Lernen, etc.)</span>
                         </div>
                     </div>
@@ -664,22 +707,31 @@
     <!-- BONUS BANNER -->
     <section class="py-16 px-4 bg-white">
         <div class="max-w-5xl mx-auto">
-            <div class="reveal bonus-pulse bg-gradient-to-br from-cyan-50 via-blue-50 to-white border-2 border-accent rounded-2xl p-8 lg:p-10 shadow-2xl relative overflow-hidden">
+            <div class="reveal bonus-pulse bg-gold-gradient border-2 border-yellow-400 rounded-2xl p-8 lg:p-10 shadow-gold relative overflow-hidden">
+                <!-- Gold Rain Particles -->
+                <div class="gold-particle" style="left: 10%; animation-duration: 3s; animation-delay: 0s;"></div>
+                <div class="gold-particle" style="left: 20%; animation-duration: 4s; animation-delay: 1s;"></div>
+                <div class="gold-particle" style="left: 30%; animation-duration: 2.5s; animation-delay: 2s;"></div>
+                <div class="gold-particle" style="left: 50%; animation-duration: 3.5s; animation-delay: 0.5s;"></div>
+                <div class="gold-particle" style="left: 60%; animation-duration: 3s; animation-delay: 1.5s;"></div>
+                <div class="gold-particle" style="left: 80%; animation-duration: 4.5s; animation-delay: 0.8s;"></div>
+                <div class="gold-particle" style="left: 90%; animation-duration: 3.2s; animation-delay: 2.2s;"></div>
+
                 <!-- Decorative Elements -->
-                <div class="absolute -top-6 -right-6 w-32 h-32 bg-cyan-200 rounded-full opacity-20 blur-2xl"></div>
-                <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-200 rounded-full opacity-20 blur-2xl"></div>
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-yellow-200 rounded-full opacity-30 blur-2xl"></div>
+                <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-yellow-100 rounded-full opacity-30 blur-2xl"></div>
                 
                 <div class="relative z-10">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="text-4xl">🎁</div>
-                        <div class="inline-flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-full text-sm font-bold">
-                            <i data-lucide="zap" class="w-4 h-4"></i>
+                        <div class="inline-flex items-center gap-2 bg-yellow-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-md">
+                            <i data-lucide="crown" class="w-4 h-4"></i>
                             BONUS FÜR KOMPLETT-KUNDEN
                         </div>
                     </div>
 
                     <h3 class="text-3xl lg:text-4xl font-bold mb-4 text-gray-900">
-                        Social-Media-Autopilot <span class="text-accent">inklusive</span>
+                        Social-Media-Autopilot <span class="text-yellow-600">inklusive</span>
                     </h3>
                     
                     <p class="text-lg text-gray-700 mb-6 max-w-3xl">
@@ -687,37 +739,37 @@
                     </p>
 
                     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-200">
+                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-yellow-200 shadow-sm">
                             <div class="flex items-center gap-2 mb-2">
-                                <i data-lucide="image" class="w-5 h-5 text-accent"></i>
+                                <i data-lucide="palette" class="w-5 h-5 text-yellow-600"></i>
                                 <h4 class="font-bold text-sm text-gray-900">Auto-Branding</h4>
                             </div>
                             <p class="text-xs text-gray-600">Logo, Farben & Design automatisch</p>
                         </div>
-                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-200">
+                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-yellow-200 shadow-sm">
                             <div class="flex items-center gap-2 mb-2">
-                                <i data-lucide="type" class="w-5 h-5 text-accent"></i>
+                                <i data-lucide="pen-tool" class="w-5 h-5 text-yellow-600"></i>
                                 <h4 class="font-bold text-sm text-gray-900">KI-Texte</h4>
                             </div>
                             <p class="text-xs text-gray-600">Emotionale Captions & Hashtags</p>
                         </div>
-                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-200">
+                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-yellow-200 shadow-sm">
                             <div class="flex items-center gap-2 mb-2">
-                                <i data-lucide="calendar-check" class="w-5 h-5 text-accent"></i>
+                                <i data-lucide="rocket" class="w-5 h-5 text-yellow-600"></i>
                                 <h4 class="font-bold text-sm text-gray-900">Auto-Posting</h4>
                             </div>
                             <p class="text-xs text-gray-600">Instagram & Facebook</p>
                         </div>
-                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-blue-200">
+                        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-xl border border-yellow-200 shadow-sm">
                             <div class="flex items-center gap-2 mb-2">
-                                <i data-lucide="trending-up" class="w-5 h-5 text-accent"></i>
+                                <i data-lucide="gem" class="w-5 h-5 text-yellow-600"></i>
                                 <h4 class="font-bold text-sm text-gray-900">40-60 Posts/Jahr</h4>
                             </div>
                             <p class="text-xs text-gray-600">Konstante Sichtbarkeit</p>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-cyan-100 to-blue-100 p-6 rounded-xl border-2 border-cyan-300">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-xl border-2 border-yellow-300 shadow-inner">
                         <div>
                             <p class="text-sm font-medium text-gray-700 mb-1">Normaler Wert des Social-Media-Autopiloten:</p>
                             <p class="text-3xl font-bold text-gray-900">1.200€<span class="text-lg text-gray-600">/Jahr</span></p>
@@ -729,7 +781,7 @@
                     </div>
 
                     <div class="mt-6 flex items-center gap-3 text-sm text-gray-700">
-                        <i data-lucide="info" class="w-5 h-5 text-accent"></i>
+                        <i data-lucide="info" class="w-5 h-5 text-yellow-600"></i>
                         <p><strong>Limitiert:</strong> Nur für die ersten 10 Fahrschulen, die beide Kern-Autopiloten buchen</p>
                     </div>
                 </div>
@@ -738,61 +790,61 @@
     </section>
 
     <!-- NEW: AI Live Demo Section (Simulated) -->
-    <section class="py-24 bg-white relative overflow-hidden">
+    <section class="py-12 lg:py-20 bg-white relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50"></div>
             <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-orange-50 rounded-full blur-3xl opacity-50"></div>
         </div>
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-12 reveal">
+            <div class="text-center mb-8 lg:mb-12 reveal">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold mb-4 shadow-lg animate-pulse"><span class="text-lg">✨</span> Live AI Demo</div>
-                <h2 class="text-4xl md:text-5xl font-bold text-[#1A1A1A] mb-4">Erlebe die KI in Aktion</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Wähle einen Modus und sieh zu, wie Retina Flow die Kommunikation für dich übernimmt.</p>
+                <h2 class="text-3xl lg:text-5xl font-bold text-[#1A1A1A] mb-4">Erlebe die KI in Aktion</h2>
+                <p class="text-base lg:text-lg text-gray-600 max-w-2xl mx-auto">Wähle einen Modus und sieh zu, wie Retina Flow die Kommunikation für dich übernimmt.</p>
             </div>
             
-            <div class="grid lg:grid-cols-2 gap-12 items-start reveal delay-100">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start reveal delay-100">
                 <!-- Left: Controls & Description -->
-                <div class="space-y-8 order-2 lg:order-1">
+                <div class="space-y-6 lg:space-y-8 order-2 lg:order-1">
                     
                     <!-- 3 Round Switch Buttons (Menu Style) -->
-                    <div class="flex justify-center lg:justify-start gap-6">
+                    <div class="flex justify-center lg:justify-start gap-4 lg:gap-6">
                         <!-- Button 1: Bewertungs-Autopilot -->
-                        <button onclick="setScenario('passed')" id="btn-passed" class="group relative w-24 h-24 rounded-full bg-white border-2 border-blue-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-2 ring-accent scale-105 active-scenario transform hover:-translate-y-1">
+                        <button onclick="setScenario('passed')" id="btn-passed" class="group relative w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white border-2 border-blue-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-2 ring-accent scale-105 active-scenario transform hover:-translate-y-1">
                             <div class="absolute -top-1 -right-1 bg-green-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10">LEAD</div>
-                            <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
-                                <i data-lucide="trophy" class="w-5 h-5 text-primary"></i>
+                            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-blue-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
+                                <i data-lucide="trophy" class="w-4 h-4 lg:w-5 lg:h-5 text-primary"></i>
                             </div>
-                            <span class="text-[10px] font-bold text-accent uppercase tracking-wide group-hover:text-accent">Review</span>
+                            <span class="text-[9px] lg:text-[10px] font-bold text-accent uppercase tracking-wide group-hover:text-accent">Review</span>
                         </button>
 
                         <!-- Button 2: Termin-Autopilot -->
-                        <button onclick="setScenario('reminder')" id="btn-reminder" class="group relative w-24 h-24 rounded-full bg-white border-2 border-gray-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-offset-4 ring-transparent transform hover:-translate-y-1">
-                            <div class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
-                                <i data-lucide="calendar-check" class="w-5 h-5 text-gray-600 group-hover:text-accent"></i>
+                        <button onclick="setScenario('reminder')" id="btn-reminder" class="group relative w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white border-2 border-gray-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-offset-4 ring-transparent transform hover:-translate-y-1">
+                            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gray-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
+                                <i data-lucide="calendar-days" class="w-4 h-4 lg:w-5 lg:h-5 text-gray-600 group-hover:text-accent"></i>
                             </div>
-                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wide group-hover:text-accent">Termin</span>
+                            <span class="text-[9px] lg:text-[10px] font-bold text-gray-400 uppercase tracking-wide group-hover:text-accent">Termin</span>
                         </button>
 
                         <!-- Button 3: Social Media -->
-                        <button onclick="setScenario('social')" id="btn-social" class="group relative w-24 h-24 rounded-full bg-white border-2 border-gray-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-offset-4 ring-transparent transform hover:-translate-y-1">
+                        <button onclick="setScenario('social')" id="btn-social" class="group relative w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-white border-2 border-gray-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-1 ring-offset-4 ring-transparent transform hover:-translate-y-1">
                             <div class="absolute -top-1 -right-1 bg-accent text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10">NEU</div>
-                            <div class="w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
-                                <i data-lucide="instagram" class="w-5 h-5 text-gray-600 group-hover:text-accent"></i>
+                            <div class="w-8 h-8 lg:w-10 lg:h-10 bg-gray-50 rounded-full flex items-center justify-center mb-1 transition-transform group-hover:scale-110">
+                                <i data-lucide="instagram" class="w-4 h-4 lg:w-5 lg:h-5 text-gray-600 group-hover:text-accent"></i>
                             </div>
-                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-wide group-hover:text-accent">Social</span>
+                            <span class="text-[9px] lg:text-[10px] font-bold text-gray-400 uppercase tracking-wide group-hover:text-accent">Social</span>
                         </button>
                     </div>
 
                     <!-- Dynamic Description Text (From Old HTML) -->
-                    <div id="scenario-content" class="bg-blue-50/50 rounded-3xl p-8 border border-blue-100 min-h-[220px] transition-all duration-500 relative">
+                    <div id="scenario-content" class="bg-blue-50/50 rounded-3xl p-6 lg:p-8 border border-blue-100 min-h-[200px] transition-all duration-500 relative">
                         <div class="absolute top-0 left-8 -translate-y-1/2 bg-white px-4 py-1 rounded-full border border-blue-100 text-xs font-bold text-primary shadow-sm uppercase tracking-wider">
                             Der Workflow
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                        <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                             <span class="bg-yellow-100 p-2 rounded-lg"><i data-lucide="star" class="w-6 h-6 text-yellow-600 fill-yellow-600"></i></span>
                             Bewertungs-Autopilot
                         </h3>
-                        <div class="text-gray-600 leading-relaxed space-y-3">
+                        <div class="text-sm lg:text-base text-gray-600 leading-relaxed space-y-3">
                             <div class="flex gap-3">
                                 <span class="font-bold text-primary">1.</span>
                                 <p>Prüfung bestanden! 🎉 Das System erkennt den Erfolg automatisch.</p>
@@ -808,26 +860,40 @@
                         </div>
                         
                         <!-- NEU: Statische Ergebnis-Box von Anfang an sichtbar -->
-                        <div class="mt-6 bg-green-50 border border-green-200 rounded-xl p-5 shadow-sm">
-                            <h4 class="font-bold text-green-900 mb-3 flex items-center gap-2">
-                                <i data-lucide="trending-up" class="w-5 h-5"></i> Dein Ergebnis:
+                        <div class="mt-6 bg-white border border-green-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
+                            
+                            <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-3 relative z-10">
+                                <div class="p-2 bg-green-100 rounded-lg shadow-sm">
+                                    <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
+                                </div>
+                                Dein Ergebnis:
                             </h4>
-                            <ul class="space-y-2 text-sm text-green-800">
-                                <li class="flex items-start gap-2">
-                                    <span class="mt-0.5">⭐</span>
+                            
+                            <ul class="space-y-3 text-sm text-gray-600 relative z-10">
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 min-w-[24px] h-6 bg-yellow-50 rounded-md flex items-center justify-center border border-yellow-100">
+                                        <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-500 fill-yellow-500"></i>
+                                    </div>
                                     <span><strong>30-50 neue Bewertungen/Jahr</strong> (statt 3-5)</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="mt-0.5">📈</span>
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 min-w-[24px] h-6 bg-blue-50 rounded-md flex items-center justify-center border border-blue-100">
+                                        <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-blue-500"></i>
+                                    </div>
                                     <span>Von <strong>4,2★ auf 4,8★</strong> in 6-12 Monaten</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="mt-0.5">🔍</span>
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 min-w-[24px] h-6 bg-indigo-50 rounded-md flex items-center justify-center border border-indigo-100">
+                                        <i data-lucide="search" class="w-3.5 h-3.5 text-indigo-500"></i>
+                                    </div>
                                     <span>Besseres <strong>Google-Ranking</strong></span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="mt-0.5">💰</span>
-                                    <span>10-15 zusätzliche Schüler = <strong>20.000-30.000€ Mehrumsatz</strong></span>
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 min-w-[24px] h-6 bg-green-50 rounded-md flex items-center justify-center border border-green-100">
+                                        <i data-lucide="coins" class="w-3.5 h-3.5 text-green-600"></i>
+                                    </div>
+                                    <span>10-15 zusätzliche Schüler = <strong class="text-green-700">20.000-30.000€ Mehrumsatz</strong></span>
                                 </li>
                             </ul>
                         </div>
@@ -835,7 +901,7 @@
 
                     <!-- Input & Action -->
                     <!-- HIER WURDE DIE ID "demo-controls" HINZUGEFÜGT -->
-                    <div id="demo-controls" class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm relative">
+                    <div id="demo-controls" class="bg-white p-4 lg:p-6 rounded-2xl border border-gray-200 shadow-sm relative">
                         <div class="mb-4">
                             <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Simuliere einen Schüler</label>
                             <div class="flex items-center gap-3">
@@ -863,11 +929,11 @@
                 <!-- Right: Phone Mockup -->
                 <div class="relative w-full max-w-sm mx-auto lg:mr-0 order-1 lg:order-2">
                     <!-- iPhone Frame -->
-                    <div class="relative bg-gray-900 rounded-[3rem] p-3 shadow-2xl border-4 border-gray-800">
-                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-800 rounded-b-xl z-20"></div>
+                    <div class="relative bg-gray-900 rounded-[2.5rem] lg:rounded-[3rem] p-2 lg:p-3 shadow-2xl border-4 border-gray-800">
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 lg:w-32 h-5 lg:h-6 bg-gray-800 rounded-b-xl z-20"></div>
                         
                         <!-- Screen -->
-                        <div class="bg-white rounded-[2.5rem] overflow-hidden h-[600px] flex flex-col relative">
+                        <div class="bg-white rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden h-[500px] sm:h-[550px] lg:h-[600px] flex flex-col relative">
                             <!-- Status Bar -->
                             <div class="bg-white/90 backdrop-blur-sm px-6 pt-4 pb-2 flex items-center justify-between text-xs text-gray-800 z-20 absolute top-0 w-full">
                                 <span class="font-medium">9:41</span>
@@ -885,7 +951,7 @@
                                     FS
                                 </div>
                                 <div class="flex-1">
-                                    <div class="font-bold text-sm">Fahrschule Schmidt</div>
+                                    <div class="font-bold text-sm">Fahrschule Markus</div>
                                     <div class="text-xs text-green-100">Retina Flow Bot</div>
                                 </div>
                                 <i data-lucide="video" class="w-5 h-5 opacity-80"></i>
@@ -897,7 +963,7 @@
                                 <i data-lucide="arrow-left" class="w-6 h-6 text-black"></i>
                                 <div class="text-center">
                                     <div class="font-bold text-xs text-gray-500 uppercase tracking-wide">Beiträge</div>
-                                    <div class="font-bold text-sm text-black">fahrschule_schmidt</div>
+                                    <div class="font-bold text-sm text-black">fahrschule_markus</div>
                                 </div>
                                 <i data-lucide="more-horizontal" class="w-6 h-6 text-black"></i>
                             </div>
@@ -958,15 +1024,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <span class="font-bold text-sm text-gray-900">fahrschule_schmidt</span>
+                                            <span class="font-bold text-sm text-gray-900">fahrschule_markus</span>
                                         </div>
                                         <i data-lucide="more-horizontal" class="w-5 h-5 text-gray-600"></i>
                                     </div>
 
                                     <!-- Post Image -->
-                                    <!-- GEÄNDERT: 'aspect-square' zu 'h-72' geändert, damit Text unten sichtbar bleibt -->
                                     <div class="relative w-full h-72 bg-gray-100 overflow-hidden">
-                                         <!-- Code aktualisiert: Sucht jetzt nach "Gemini_Generated_Image_i65srbi65srbi65s.png" -->
+                                         <!-- Bilddatei -->
                                          <img src="Gemini_Generated_Image_i65srbi65srbi65s.png" alt="Führerschein bestanden" class="w-full h-full object-cover">
                                          
                                          <!-- Animated Like Heart (hidden initially) -->
@@ -989,7 +1054,7 @@
                                         <div class="font-bold text-sm mb-2 text-gray-900">Gefällt 42 Mal</div>
                                         
                                         <div class="text-sm leading-snug">
-                                            <span class="font-bold mr-1 text-gray-900">fahrschule_schmidt</span>
+                                            <span class="font-bold mr-1 text-gray-900">fahrschule_markus</span>
                                             <span id="ig-caption-text" class="text-gray-800"></span>
                                         </div>
                                         
@@ -1025,43 +1090,28 @@
     </section>
 
     <!-- ROI Calculator Section -->
-    <section id="roi" class="py-24 px-4 bg-white">
+    <section id="roi" class="py-16 lg:py-24 px-4 bg-white">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6">Berechne deine Ersparnis</h2>
-                <p class="text-xl text-textGray max-w-3xl mx-auto">
-                    Finde heraus, wie viel Zeit und Geld du mit Retina Flow jeden Monat sparst
+            <div class="text-center mb-12 lg:mb-16 reveal">
+                <h2 class="text-3xl lg:text-5xl font-bold mb-4 lg:mb-6">Dein Umsatz-Potential</h2>
+                <p class="text-lg lg:text-xl text-textGray max-w-3xl mx-auto">
+                    Verwandle unbezahlte Bürozeit in bezahlte Fahrstunden.
                 </p>
             </div>
 
             <!-- Warning Banner -->
-            <div class="reveal mb-8 bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-accent rounded-xl p-6 shadow-card">
+            <div class="reveal mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-primary rounded-xl p-6 shadow-card">
                 <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="alert-triangle" class="w-6 h-6 text-accent"></i>
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="info" class="w-6 h-6 text-primary"></i>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-lg font-bold text-gray-900 mb-3">Aktuelle versteckte Kosten deiner Fahrschule:</h3>
-                        <div class="space-y-2 text-sm text-gray-700">
-                            <div class="flex items-start gap-2">
-                                <span class="font-semibold min-w-[200px]">Terminkoordination:</span>
-                                <span>8-12h/Woche × 52 Wochen = <strong class="text-accent">23.000€/Jahr</strong></span>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="font-semibold min-w-[200px]">Verpasste Bewertungen:</span>
-                                <span>4,2★ statt 4,8★ = <strong class="text-accent">30.000€/Jahr</strong> entgangener Umsatz</span>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="font-semibold min-w-[200px]">Inaktives Instagram:</span>
-                                <span>10 verlorene Schüler = <strong class="text-accent">20.000€/Jahr</strong></span>
-                            </div>
-                            <div class="border-t border-orange-200 mt-3 pt-3">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-bold text-base">Gesamt:</span>
-                                    <span class="text-2xl font-bold text-accent">Bis zu 73.000€ Opportunitätskosten pro Jahr</span>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Die einfache Rechnung:</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Retina Flow befreit deine Fahrlehrer vom lästigen Organisations-Stress nach Feierabend (Termine schieben, WhatsApps beantworten).
+                            <br><br>
+                            <strong>Der Effekt:</strong> Mehr Spaß am Job und Zeit für das Wesentliche. Wenn diese gewonnene Energie in nur <strong>2 Fahrstunden (90 Min) mehr pro Woche</strong> fließt, entsteht ein gewaltiger Hebel für deinen Jahresumsatz.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1069,7 +1119,7 @@
             <div class="reveal bg-gradient-to-br from-blue-50 to-white p-8 lg:p-12 rounded-3xl shadow-2xl border border-blue-100">
                 <!-- Calculator -->
                 <div class="space-y-8 mb-8">
-                    <!-- Slider 1 -->
+                    <!-- Slider 1: Anzahl Fahrlehrer -->
                     <div>
                         <div class="flex items-center justify-between mb-3">
                             <label class="text-lg font-bold text-textDark">Anzahl Fahrlehrer</label>
@@ -1090,115 +1140,108 @@
                         </div>
                     </div>
 
-                    <!-- Slider 2 -->
+                    <!-- Slider 2: Preis pro Fahrstunde -->
                     <div>
                         <div class="flex items-center justify-between mb-3">
-                            <label class="text-lg font-bold text-textDark">WhatsApp-Nachrichten pro Woche</label>
-                            <span id="messages-value" class="text-2xl font-bold text-primary">150</span>
+                            <label class="text-lg font-bold text-textDark">Preis pro Fahrstunde (45 min)</label>
+                            <span id="rate-value" class="text-2xl font-bold text-primary">60€</span>
                         </div>
                         <input 
                             type="range" 
-                            id="messages" 
-                            min="50" 
-                            max="500" 
-                            value="150" 
-                            step="10"
-                            class="w-full" 
-                            oninput="calculateROI()"
-                        >
-                        <div class="flex justify-between text-sm text-textGray mt-2">
-                            <span>50</span>
-                            <span>500</span>
-                        </div>
-                    </div>
-
-                    <!-- Slider 3 -->
-                    <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <label class="text-lg font-bold text-textDark">Erfolgreiche Prüfungen pro Monat</label>
-                            <span id="exams-value" class="text-2xl font-bold text-primary">25</span>
-                        </div>
-                        <input 
-                            type="range" 
-                            id="exams" 
-                            min="5" 
-                            max="100" 
-                            value="25" 
+                            id="hourly-rate" 
+                            min="40" 
+                            max="120" 
+                            value="60" 
                             step="5"
                             class="w-full" 
                             oninput="calculateROI()"
                         >
                         <div class="flex justify-between text-sm text-textGray mt-2">
-                            <span>5</span>
-                            <span>100</span>
+                            <span>40€</span>
+                            <span>120€</span>
+                        </div>
+                    </div>
+
+                    <!-- Slider 3: Gewonnene Fahrstunden -->
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <label class="text-lg font-bold text-textDark">Zusätzliche Fahrstunden pro Woche/Lehrer</label>
+                            <span id="extra-hours-value" class="text-2xl font-bold text-primary">2</span>
+                        </div>
+                        <input 
+                            type="range" 
+                            id="extra-hours" 
+                            min="1" 
+                            max="10" 
+                            value="2" 
+                            step="1"
+                            class="w-full" 
+                            oninput="calculateROI()"
+                        >
+                        <div class="flex justify-between text-sm text-textGray mt-2">
+                            <span>1 Std.</span>
+                            <span>10 Std.</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Results -->
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                                <i data-lucide="clock" class="w-6 h-6 text-primary"></i>
-                            </div>
-                            <span class="text-sm font-semibold text-textGray">Zeitersparnis</span>
-                        </div>
-                        <div class="text-3xl font-bold text-primary mb-1" id="time-saved">10.2h</div>
-                        <div class="text-sm text-textGray">pro Woche</div>
-                    </div>
-
-                    <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100 flex flex-col justify-center">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                                <i data-lucide="euro" class="w-6 h-6 text-green-600"></i>
+                                <i data-lucide="banknote" class="w-6 h-6 text-green-600"></i>
                             </div>
-                            <span class="text-sm font-semibold text-textGray">Geldersparnis</span>
+                            <span class="text-sm font-semibold text-textGray">Zusatzumsatz pro Monat</span>
                         </div>
-                        <div class="text-3xl font-bold text-green-600 mb-1" id="money-saved">2.380€</div>
-                        <div class="text-sm text-textGray">pro Monat</div>
+                        <div class="text-4xl font-bold text-green-600 mb-1" id="monthly-revenue">1.560€</div>
+                        <div class="text-sm text-textGray">für deine Fahrschule</div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100">
+                    <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100 flex flex-col justify-center">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center">
                                 <i data-lucide="trending-up" class="w-6 h-6 text-accent"></i>
                             </div>
-                            <span class="text-sm font-semibold text-textGray">ROI</span>
+                            <span class="text-sm font-semibold text-textGray">Zusatzumsatz pro Jahr</span>
                         </div>
-                        <div class="text-3xl font-bold text-accent mb-1" id="roi-value">390%</div>
-                        <div class="text-sm text-textGray">nach 12 Monaten</div>
+                        <div class="text-4xl font-bold text-accent mb-1" id="yearly-revenue">18.720€</div>
+                        <div class="text-sm text-textGray">bei 52 Wochen</div>
                     </div>
                 </div>
 
-                <div class="mt-8 bg-gradient-to-r from-primary to-blue-700 p-6 rounded-2xl text-white">
-                    <div class="flex items-start gap-4">
-                        <i data-lucide="lightbulb" class="w-8 h-8 flex-shrink-0 mt-1"></i>
-                        <div>
-                            <p class="font-bold text-lg mb-2">Das bedeutet für dich:</p>
-                            <p class="text-blue-100 leading-relaxed">
-                                Mit Retina Flow hast du <strong id="summary-time">10.2 Stunden</strong> mehr Zeit pro Woche und sparst <strong id="summary-money">2.380€</strong> pro Monat. Das entspricht einem ROI von <strong id="summary-roi">390%</strong> im ersten Jahr.
+                <!-- Ergebnis Erklärung -->
+                <div class="mt-8 bg-gradient-to-r from-primary to-blue-700 p-6 lg:p-8 rounded-2xl text-white shadow-xl border border-blue-500/30">
+                    <div class="flex flex-col md:flex-row gap-6 items-center">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-xl mb-2 flex items-center gap-2">
+                                <i data-lucide="lightbulb" class="w-6 h-6 text-yellow-300"></i>
+                                Das Prinzip:
+                            </h3>
+                            <p class="text-blue-50 leading-relaxed text-lg">
+                                Statt nach Feierabend genervt Nachrichten zu beantworten, machen deine <strong id="summary-teachers">3</strong> Fahrlehrer das, was ihnen Spaß macht: Fahren.
+                                <br>
+                                Nur <strong id="summary-hours">2</strong> zusätzliche Fahrstunden (statt Orga-Stress) bringen dir <strong id="summary-total" class="text-white border-b-2 border-green-400/50 pb-0.5">18.720€</strong> mehr Umsatz im Jahr.
                             </p>
                         </div>
+                        <div class="shrink-0">
+                            <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition shadow-lg inline-flex items-center gap-2">
+                                Potenzial besprechen
+                                <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
-
-                <div class="mt-8 text-center">
-                    <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="inline-flex items-center gap-3 bg-accent text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-accentHover transition shadow-glow hover:shadow-xl">
-                        Jetzt kostenloses Erstgespräch buchen
-                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-24 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section id="faq" class="py-16 lg:py-24 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6">Häufige Fragen</h2>
-                <p class="text-xl text-textGray">
+            <div class="text-center mb-12 lg:mb-16 reveal">
+                <h2 class="text-3xl lg:text-5xl font-bold mb-4 lg:mb-6">Häufige Fragen</h2>
+                <p class="text-lg lg:text-xl text-textGray">
                     Alles, was du über Retina Flow wissen musst
                 </p>
             </div>
@@ -1337,56 +1380,83 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-12 px-4">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">
+    <footer class="bg-gray-900 text-gray-400 py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Top Part -->
+            <div class="grid md:grid-cols-12 gap-8 mb-12">
+                <!-- Brand Column (Span 4) -->
+                <div class="md:col-span-4">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-glow">
                             R
                         </div>
-                        <span class="font-bold text-xl text-white">Retina Flow</span>
+                        <span class="font-bold text-2xl text-white tracking-tight">Retina Flow</span>
                     </div>
-                    <p class="text-sm leading-relaxed">
-                        KI-gesteuerte Automatisierung für moderne Fahrschulen im DACH-Raum.
+                    <p class="text-sm leading-relaxed mb-6 text-gray-500 max-w-sm">
+                        Die All-in-One Automatisierungslösung für zukunftsorientierte Fahrschulen. Mehr Zeit für Schüler, mehr Umsatz für dich.
                     </p>
+                    <div class="flex gap-4">
+                        <!-- Social Icons -->
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div>
-                    <h4 class="font-bold text-white mb-4">Produkt</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#solutions" class="hover:text-white transition">Lösungen</a></li>
-                        <li><a href="#roi" class="hover:text-white transition">ROI Rechner</a></li>
-                        <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
+                <!-- Spacer (Span 1) -->
+                <div class="hidden md:block md:col-span-2"></div>
+
+                <!-- Links Column 1 (Span 2) -->
+                <div class="md:col-span-2">
+                    <h4 class="font-bold text-white mb-6 text-sm uppercase tracking-wider">Produkt</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#solutions" class="hover:text-primary transition-colors duration-200">Funktionen</a></li>
+                        <li><a href="#roi" class="hover:text-primary transition-colors duration-200">Umsatz-Rechner</a></li>
+                        <li><a href="#faq" class="hover:text-primary transition-colors duration-200">Häufige Fragen</a></li>
                     </ul>
                 </div>
 
-                <div>
-                    <h4 class="font-bold text-white mb-4">Unternehmen</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white transition">Über uns</a></li>
-                        <li><a href="#" class="hover:text-white transition">Datenschutz</a></li>
-                        <li><a href="#" class="hover:text-white transition">Impressum</a></li>
+                <!-- Links Column 2 (Span 2) -->
+                <div class="md:col-span-2">
+                    <h4 class="font-bold text-white mb-6 text-sm uppercase tracking-wider">Rechtliches</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200">Impressum</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200">Datenschutz</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200">AGB</a></li>
                     </ul>
                 </div>
 
-                <div>
-                    <h4 class="font-bold text-white mb-4">Kontakt</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-center gap-2">
-                            <i data-lucide="mail" class="w-4 h-4"></i>
-                            <a href="mailto:info@retinaflow.de" class="hover:text-white transition">info@retinaflow.de</a>
+                <!-- Links Column 3 (Span 2) -->
+                <div class="md:col-span-2">
+                    <h4 class="font-bold text-white mb-6 text-sm uppercase tracking-wider">Kontakt</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="mail" class="w-4 h-4 mt-0.5 text-primary"></i>
+                            <a href="mailto:info@retinaflow.de" class="hover:text-white transition-colors duration-200">info@retinaflow.de</a>
                         </li>
-                        <li class="flex items-center gap-2">
-                            <i data-lucide="calendar" class="w-4 h-4"></i>
-                            <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="hover:text-white transition">Termin buchen</a>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="calendar" class="w-4 h-4 mt-0.5 text-primary"></i>
+                            <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="hover:text-white transition-colors duration-200">Termin buchen</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="border-t border-gray-800 pt-8 text-center text-sm">
+            <!-- Bottom Part -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
                 <p>&copy; 2024 Retina Flow. Alle Rechte vorbehalten.</p>
+                <div class="flex gap-6">
+                    <span class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        System operational
+                    </span>
+                </div>
             </div>
         </div>
     </footer>
@@ -1394,7 +1464,7 @@
     <script>
         lucide.createIcons();
 
-        // SCENARIO DATA (Texte exakt aus dem alten Code übernommen)
+        // SCENARIO DATA
         const scenarios = {
             'passed': {
                 title: 'Bewertungs-Autopilot',
@@ -1406,28 +1476,42 @@
                     '2 Stunden später erhält der Schüler automatisch eine freundliche WhatsApp mit dem Bewertungslink.',
                     'Das System erinnert höflich daran, falls vergessen. <strong>Ergebnis: 90% mehr Bewertungen.</strong>'
                 ],
-                // NEU: Ergebnis-Box
+                // Premium Ergebnis-Box
                 extraHtml: `
-                    <div class="mt-6 bg-green-50 border border-green-200 rounded-xl p-5 shadow-sm">
-                        <h4 class="font-bold text-green-900 mb-3 flex items-center gap-2">
-                            <i data-lucide="trending-up" class="w-5 h-5"></i> Dein Ergebnis:
+                    <div class="mt-6 bg-white border border-green-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
+                        
+                        <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-3 relative z-10">
+                            <div class="p-2 bg-green-100 rounded-lg shadow-sm">
+                                <i data-lucide="trending-up" class="w-5 h-5 text-green-600"></i>
+                            </div>
+                            Dein Ergebnis:
                         </h4>
-                        <ul class="space-y-2 text-sm text-green-800">
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">⭐</span>
+                        
+                        <ul class="space-y-3 text-sm text-gray-600 relative z-10">
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-yellow-50 rounded-md flex items-center justify-center border border-yellow-100">
+                                    <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-500 fill-yellow-500"></i>
+                                </div>
                                 <span><strong>30-50 neue Bewertungen/Jahr</strong> (statt 3-5)</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">📈</span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-blue-50 rounded-md flex items-center justify-center border border-blue-100">
+                                    <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-blue-500"></i>
+                                </div>
                                 <span>Von <strong>4,2★ auf 4,8★</strong> in 6-12 Monaten</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">🔍</span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-indigo-50 rounded-md flex items-center justify-center border border-indigo-100">
+                                    <i data-lucide="search" class="w-3.5 h-3.5 text-indigo-500"></i>
+                                </div>
                                 <span>Besseres <strong>Google-Ranking</strong></span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">💰</span>
-                                <span>10-15 zusätzliche Schüler = <strong>20.000-30.000€ Mehrumsatz</strong></span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-green-50 rounded-md flex items-center justify-center border border-green-100">
+                                    <i data-lucide="coins" class="w-3.5 h-3.5 text-green-600"></i>
+                                </div>
+                                <span>10-15 zusätzliche Schüler = <strong class="text-green-700">20.000-30.000€ Mehrumsatz</strong></span>
                             </li>
                         </ul>
                     </div>
@@ -1443,28 +1527,42 @@
                     'Die KI checkt Fahrlehrer-Kalender & Fahrzeuge und macht passende Vorschläge.',
                     'Schüler antwortet "Dienstag passt" – Termin wird gebucht, bestätigt & erinnert.'
                 ],
-                // NEU: Ergebnis-Box für Termin-Autopilot
+                // Premium Ergebnis-Box für Termin-Autopilot
                 extraHtml: `
-                    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-5 shadow-sm">
-                        <h4 class="font-bold text-blue-900 mb-3 flex items-center gap-2">
-                            <i data-lucide="trending-up" class="w-5 h-5"></i> Dein Ergebnis:
+                    <div class="mt-6 bg-white border border-blue-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
+
+                        <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-3 relative z-10">
+                            <div class="p-2 bg-blue-100 rounded-lg shadow-sm">
+                                <i data-lucide="zap" class="w-5 h-5 text-blue-600"></i>
+                            </div>
+                            Dein Ergebnis:
                         </h4>
-                        <ul class="space-y-2 text-sm text-blue-800">
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">⏱️</span>
+                        
+                        <ul class="space-y-3 text-sm text-gray-600 relative z-10">
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-blue-50 rounded-md flex items-center justify-center border border-blue-100">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-blue-500"></i>
+                                </div>
                                 <span><strong>8-12 Std./Woche</strong> Zeitersparnis</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">📅</span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-green-50 rounded-md flex items-center justify-center border border-green-100">
+                                    <i data-lucide="calendar-check" class="w-3.5 h-3.5 text-green-500"></i>
+                                </div>
                                 <span><strong>100% Auslastung</strong> ohne Lücken</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">📱</span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-purple-50 rounded-md flex items-center justify-center border border-purple-100">
+                                    <i data-lucide="message-circle-off" class="w-3.5 h-3.5 text-purple-500"></i>
+                                </div>
                                 <span>Kein <strong>WhatsApp-Ping-Pong</strong> am Abend</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">💰</span>
-                                <span>Wert: <strong>23.000€/Jahr</strong> (durch Zeitgewinn)</span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-emerald-50 rounded-md flex items-center justify-center border border-emerald-100">
+                                    <i data-lucide="banknote" class="w-3.5 h-3.5 text-emerald-600"></i>
+                                </div>
+                                <span>Wert: <strong class="text-emerald-700">23.000€/Jahr</strong> (durch Zeitgewinn)</span>
                             </li>
                         </ul>
                     </div>
@@ -1480,28 +1578,42 @@
                     'Das System erstellt automatisch das Design (Logo, "Bestanden"-Badge) und schreibt einen KI-Text.',
                     'Nach kurzer Bestätigung geht der Post live auf Instagram & Facebook.'
                 ],
-                // NEU: Ergebnis-Box für Social Media
+                // Premium Ergebnis-Box für Social Media
                 extraHtml: `
-                    <div class="mt-6 bg-pink-50 border border-pink-200 rounded-xl p-5 shadow-sm">
-                        <h4 class="font-bold text-pink-900 mb-3 flex items-center gap-2">
-                            <i data-lucide="trending-up" class="w-5 h-5"></i> Dein Ergebnis:
+                    <div class="mt-6 bg-white border border-pink-100 rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-pink-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
+
+                        <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-3 relative z-10">
+                            <div class="p-2 bg-pink-100 rounded-lg shadow-sm">
+                                <i data-lucide="rocket" class="w-5 h-5 text-pink-600"></i>
+                            </div>
+                            Dein Ergebnis:
                         </h4>
-                        <ul class="space-y-2 text-sm text-pink-800">
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">📱</span>
+                        
+                        <ul class="space-y-3 text-sm text-gray-600 relative z-10">
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-pink-50 rounded-md flex items-center justify-center border border-pink-100">
+                                    <i data-lucide="image-plus" class="w-3.5 h-3.5 text-pink-500"></i>
+                                </div>
                                 <span><strong>40-60 Posts/Jahr</strong> vollautomatisch</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">🎨</span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-purple-50 rounded-md flex items-center justify-center border border-purple-100">
+                                    <i data-lucide="palette" class="w-3.5 h-3.5 text-purple-500"></i>
+                                </div>
                                 <span>Professionelles <strong>Employer Branding</strong></span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">👁️</span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-orange-50 rounded-md flex items-center justify-center border border-orange-100">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5 text-orange-500"></i>
+                                </div>
                                 <span>Konstante <strong>Sichtbarkeit</strong> bei der Zielgruppe</span>
                             </li>
-                            <li class="flex items-start gap-2">
-                                <span class="mt-0.5">🎁</span>
-                                <span>Wert: <strong>1.200€/Jahr</strong> (für dich kostenlos)</span>
+                            <li class="flex items-start gap-3">
+                                <div class="mt-0.5 min-w-[24px] h-6 bg-yellow-50 rounded-md flex items-center justify-center border border-yellow-100">
+                                    <i data-lucide="gift" class="w-3.5 h-3.5 text-yellow-600"></i>
+                                </div>
+                                <span>Wert: <strong class="text-gray-900">1.200€/Jahr</strong> (für dich kostenlos)</span>
                             </li>
                         </ul>
                     </div>
@@ -1510,39 +1622,38 @@
         };
 
         function calculateROI() {
+            // Inputs holen
             const teachers = parseInt(document.getElementById('teachers').value);
-            const messages = parseInt(document.getElementById('messages').value);
-            const exams = parseInt(document.getElementById('exams').value);
+            const pricePerLesson = parseInt(document.getElementById('hourly-rate').value); // Preis pro Fahrstunde
+            const extraHours = parseInt(document.getElementById('extra-hours').value); // Zusätzliche Stunden
 
+            // Werte im UI aktualisieren
             document.getElementById('teachers-value').textContent = teachers;
-            document.getElementById('messages-value').textContent = messages;
-            document.getElementById('exams-value').textContent = exams;
+            document.getElementById('rate-value').textContent = pricePerLesson + '€';
+            document.getElementById('extra-hours-value').textContent = extraHours;
 
-            // Zeit-Ersparnis berechnen (Stunden pro Woche)
-            const timePerMessage = 2; // Minuten pro Nachricht
-            const timeSaved = (messages * timePerMessage) / 60;
-            const timeSavedRounded = Math.round(timeSaved * 10) / 10;
+            // BERECHNUNGSLOGIK:
+            // Wochenumsatz = Lehrer * Zusatzstunden * Preis
+            const weeklyRevenue = teachers * extraHours * pricePerLesson;
+            
+            // Monatsumsatz (x 4 Wochen)
+            const monthlyRevenue = Math.round(weeklyRevenue * 4);
+            
+            // Jahresumsatz (x 52 Wochen)
+            const yearlyRevenue = weeklyRevenue * 52;
 
-            // Geld-Ersparnis berechnen (pro Monat)
-            const hourlyRate = 45; // Euro pro Stunde
-            const moneySaved = Math.round((timeSaved * 4.33 * hourlyRate)); // 4.33 Wochen pro Monat
+            // Update UI Ergebnisse
+            document.getElementById('monthly-revenue').textContent = monthlyRevenue.toLocaleString('de-DE') + '€';
+            document.getElementById('yearly-revenue').textContent = yearlyRevenue.toLocaleString('de-DE') + '€';
 
-            // ROI berechnen
-            const monthlyCost = 290; // Durchschnittliche Kosten
-            const roi = Math.round(((moneySaved - monthlyCost) / monthlyCost) * 100);
-
-            // Update UI
-            document.getElementById('time-saved').textContent = timeSavedRounded + 'h';
-            document.getElementById('money-saved').textContent = moneySaved.toLocaleString('de-DE') + '€';
-            document.getElementById('roi-value').textContent = roi + '%';
-
-            document.getElementById('summary-time').textContent = timeSavedRounded + ' Stunden';
-            document.getElementById('summary-money').textContent = moneySaved.toLocaleString('de-DE') + '€';
-            document.getElementById('summary-roi').textContent = roi + '%';
+            // Text Update
+            document.getElementById('summary-teachers').textContent = teachers;
+            document.getElementById('summary-hours').textContent = extraHours;
+            document.getElementById('summary-total').textContent = yearlyRevenue.toLocaleString('de-DE') + '€';
         }
 
-        // Initial calculation
-        calculateROI();
+        // Initial calculation call
+        document.addEventListener('DOMContentLoaded', calculateROI);
 
         // --- Nav Marker Logic ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -1710,6 +1821,30 @@
                         messageText = `Hey ${name}! 🎉 Herzlichen Glückwunsch zum Führerschein! 🚗💨 Wir sind mega stolz auf dich. 🥳 Würdest du uns kurz bei Google bewerten? ⭐ Das wäre super lieb!`;
                         const msg = createBotMessage(messageText);
                         messageList.insertBefore(msg, aiLoading);
+                        
+                        // --- NEU: Google Link Vorschau Karte ---
+                        const linkPreview = document.createElement('div');
+                        linkPreview.className = 'dynamic-msg bg-white rounded-lg rounded-tl-none shadow-sm max-w-[85%] self-start relative border border-gray-100 mb-3 animate-fade-in overflow-hidden cursor-pointer hover:bg-gray-50 transition ml-0.5';
+                        linkPreview.innerHTML = `
+                            <div class="h-28 bg-blue-50 relative overflow-hidden flex items-center justify-center">
+                                 <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-gray-100"></div>
+                                 <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm relative z-10">
+                                    <span class="font-bold text-2xl" style="color: #4285F4;">G</span>
+                                 </div>
+                            </div>
+                            <div class="p-3 bg-[#FAFAFA] border-t border-gray-100">
+                                 <h4 class="font-bold text-sm text-gray-900 leading-tight mb-1">Fahrschule Markus</h4>
+                                 <div class="flex items-center gap-1 mb-1">
+                                    <span class="text-xs text-orange-500 font-bold">5.0 ★★★★★</span>
+                                    <span class="text-[10px] text-gray-400">(128 Rezensionen)</span>
+                                 </div>
+                                 <p class="text-[11px] text-gray-500 truncate">Fahrschule • Deine Stadt</p>
+                                 <p class="text-[10px] text-blue-600 mt-2 truncate">google.com/maps/place/...</p>
+                            </div>
+                        `;
+                        messageList.insertBefore(linkPreview, aiLoading);
+                        // --- ENDE NEU ---
+
                         lucide.createIcons();
                         scrollToBottom();
                         btn.disabled = false;
@@ -1843,11 +1978,11 @@
                     <div class="absolute top-0 left-8 -translate-y-1/2 bg-white px-4 py-1 rounded-full border border-blue-100 text-xs font-bold text-primary shadow-sm uppercase tracking-wider">
                         Der Workflow
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                    <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                         <span class="${content.headerBg} p-2 rounded-lg"><i data-lucide="${content.icon}" class="w-6 h-6 ${content.iconClass}"></i></span>
                         ${content.title}
                     </h3>
-                    <div class="text-gray-600 leading-relaxed space-y-3">
+                    <div class="text-sm lg:text-base text-gray-600 leading-relaxed space-y-3">
                         <div class="flex gap-3">
                             <span class="font-bold text-primary">1.</span>
                             <p>${content.steps[0]}</p>
