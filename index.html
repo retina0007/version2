@@ -216,8 +216,13 @@
     <div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <nav class="pointer-events-auto bg-navBg nav-glass border border-white/60 shadow-float rounded-full pl-6 pr-2 py-2 flex items-center justify-between max-w-5xl w-full transition-all duration-300 hover:shadow-lg">
             <a href="#" class="flex items-center gap-2.5 mr-4 group">
-                <!-- LOGO PLATZHALTER: Lade dein Logo als "logo.png" hoch -->
-                <img src="logo.png" alt="Retina Flow Logo" class="w-8 h-8 rounded-lg shadow-sm group-hover:scale-105 transition-transform object-cover">
+                <!-- LOGO PLATZHALTER: Lädt "logo.png". Falls nicht vorhanden, wird ein generiertes Bild angezeigt. -->
+                <img 
+                    src="logo.png" 
+                    onerror="this.onerror=null; this.src='https://placehold.co/100x100/0540AD/ffffff?text=R';" 
+                    alt="Retina Flow Logo" 
+                    class="w-8 h-8 rounded-lg shadow-sm group-hover:scale-105 transition-transform object-cover"
+                >
                 <span class="font-bold text-lg tracking-tight text-primary">Retina Flow</span>
             </a>
             
@@ -1419,8 +1424,13 @@
                 <!-- Brand Column (Span 4) -->
                 <div class="md:col-span-4">
                     <div class="flex items-center gap-2 mb-6">
-                        <!-- LOGO PLATZHALTER IM FOOTER -->
-                        <img src="logo.png" alt="Retina Flow Logo" class="w-10 h-10 rounded-xl shadow-glow object-cover">
+                        <!-- LOGO PLATZHALTER IM FOOTER: Ebenfalls mit Fallback -->
+                        <img 
+                            src="logo.png" 
+                            onerror="this.onerror=null; this.src='https://placehold.co/100x100/0540AD/ffffff?text=R';" 
+                            alt="Retina Flow Logo" 
+                            class="w-10 h-10 rounded-xl shadow-glow object-cover"
+                        >
                         <span class="font-bold text-2xl text-white tracking-tight">Retina Flow</span>
                     </div>
                     <p class="text-sm leading-relaxed mb-6 text-gray-500 max-w-sm">
