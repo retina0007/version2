@@ -258,10 +258,28 @@
 
     <!-- Hero Section (Optimized for Laptop View) -->
     <section id="start" class="relative pt-28 pb-16 lg:pt-36 lg:pb-24 px-4 overflow-hidden bg-primary">
-        <!-- Background Decor -->
-        <div class="absolute top-0 right-0 w-2/3 h-full bg-white/5 skew-x-12 transform origin-top-right pointer-events-none"></div>
+        
+        <!-- NEU: Subtiles Hintergrundbild (Option 1) -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <!-- 
+                TIPP: Lade dein Bild als "hero-bg.jpg" hoch.
+                opacity-20: Macht das Bild transparent (20% sichtbar).
+                mix-blend-overlay: Verrechnet es künstlerisch mit dem blauen Hintergrund.
+            -->
+            <img 
+                src="hero-bg.jpg" 
+                onerror="this.style.display='none'" 
+                alt="Hintergrund" 
+                class="w-full h-full object-cover opacity-20 mix-blend-overlay"
+            >
+            <!-- Blauer Farbverlauf darüber für perfekte Lesbarkeit -->
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/90"></div>
+        </div>
 
-        <div class="max-w-7xl mx-auto relative z-10">
+        <!-- Background Decor -->
+        <div class="absolute top-0 right-0 w-2/3 h-full bg-white/5 skew-x-12 transform origin-top-right pointer-events-none z-10"></div>
+
+        <div class="max-w-7xl mx-auto relative z-20">
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <!-- Left: New Content adapted to Blue Design -->
                 <div class="reveal space-y-6 lg:space-y-8 text-white">
