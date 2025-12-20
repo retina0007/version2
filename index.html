@@ -263,17 +263,17 @@
         <div class="absolute inset-0 z-0 pointer-events-none">
             <!-- 
                 TIPP: Lade dein Bild als "hero-bg.jpg" hoch.
-                opacity-20: Macht das Bild transparent (20% sichtbar).
-                mix-blend-overlay: Verrechnet es künstlerisch mit dem blauen Hintergrund.
+                opacity-30: Erhöht auf 30% für bessere Sichtbarkeit bei dunklerem Overlay.
+                onerror: Lädt ein hochwertiges Fahrschul-Symbolbild aus dem Web, falls hero-bg.jpg fehlt.
             -->
             <img 
                 src="hero-bg.jpg" 
-                onerror="this.style.display='none'" 
-                alt="Hintergrund" 
-                class="w-full h-full object-cover opacity-20 mix-blend-overlay"
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=2000';" 
+                alt="Fahrschule Hintergrund" 
+                class="w-full h-full object-cover opacity-30 mix-blend-overlay"
             >
             <!-- Blauer Farbverlauf darüber für perfekte Lesbarkeit -->
-            <div class="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/90"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/70 to-primary/95"></div>
         </div>
 
         <!-- Background Decor -->
@@ -828,7 +828,6 @@
     </section>
 
     <!-- NEW: AI Live Demo Section (Simulated) -->
-    <!-- GEÄNDERT: Padding weiter reduziert (py-12 statt py-20) für kompakten "Rahmen"-Look -->
     <section class="py-8 lg:py-16 bg-white relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50"></div>
@@ -879,23 +878,23 @@
                     <!-- Dynamic Description Text -->
                     <!-- GEÄNDERT: min-h entfernt, p-4 statt p-5 für kompaktere Höhe -->
                     <div id="scenario-content" class="bg-blue-50/50 rounded-2xl p-4 lg:p-6 border border-blue-100 transition-all duration-500 relative">
-                        <div class="absolute top-0 left-6 -translate-y-1/2 bg-white px-3 py-0.5 rounded-full border border-blue-100 text-[10px] font-bold text-primary shadow-sm uppercase tracking-wider">
+                        <div class="absolute top-0 left-8 -translate-y-1/2 bg-white px-4 py-1 rounded-full border border-blue-100 text-xs font-bold text-primary shadow-sm uppercase tracking-wider">
                             Der Ablauf
                         </div>
-                        <h3 class="text-lg lg:text-xl font-bold text-gray-900 mb-2 flex items-center gap-2 mt-2">
-                            <span class="bg-yellow-100 p-1.5 rounded-lg"><i data-lucide="star" class="w-5 h-5 text-yellow-600 fill-yellow-600"></i></span>
+                        <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                            <span class="bg-yellow-100 p-2 rounded-lg"><i data-lucide="star" class="w-6 h-6 text-yellow-600 fill-yellow-600"></i></span>
                             Bewertungs-Autopilot
                         </h3>
-                        <div class="text-xs lg:text-sm text-gray-600 leading-relaxed space-y-2">
-                            <div class="flex gap-2">
+                        <div class="text-sm lg:text-base text-gray-600 leading-relaxed space-y-3">
+                            <div class="flex gap-3">
                                 <span class="font-bold text-primary">1.</span>
                                 <p>Prüfung bestanden! 🎉 Das System erkennt den Erfolg automatisch.</p>
                             </div>
-                            <div class="flex gap-2">
+                            <div class="flex gap-3">
                                 <span class="font-bold text-primary">2.</span>
                                 <p>2 Stunden später erhält der Schüler automatisch eine freundliche WhatsApp mit dem Bewertungslink.</p>
                             </div>
-                            <div class="flex gap-2">
+                            <div class="flex gap-3">
                                 <span class="font-bold text-primary">3.</span>
                                 <p>Das System erinnert höflich daran, falls vergessen. <strong>Ergebnis: 90% mehr Bewertungen.</strong></p>
                             </div>
@@ -1019,7 +1018,7 @@
                             <!-- Chat Area (WhatsApp) -->
                             <div class="bg-[#ECE5DD] flex-1 p-3 overflow-y-auto relative transition-all duration-300" id="chat-container">
                                 <!-- Chat Background Pattern -->
-                                <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: 300px;"></div>
+                                <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: 400px;"></div>
                                 
                                 <div class="relative z-10 flex flex-col gap-3 pt-1">
                                     <div class="flex justify-center mb-2">
