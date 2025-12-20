@@ -16,7 +16,6 @@
     
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-
     <script>
         tailwind.config = {
             theme: {
@@ -52,7 +51,6 @@
             }
         }
     </script>
-
     <style>
         /* Animation Classes */
         .reveal {
@@ -64,7 +62,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
         /* NEU: Schwebe-Animation für die Kreise */
         @keyframes float-gentle {
             0%, 100% { transform: translateY(0px); }
@@ -83,13 +80,11 @@
         .active-pulse {
             animation: pulse-ring 2s infinite;
         }
-
         /* Glassmorphism Navigation */
         .nav-glass {
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
-
         /* Custom Range Slider Styling */
         input[type=range] {
             -webkit-appearance: none; 
@@ -117,7 +112,6 @@
             background: #E5E7EB;
             border-radius: 4px;
         }
-
         /* Nav Marker Logic */
         #nav-marker {
             transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
@@ -132,19 +126,16 @@
         .nav-link:not(.active):hover {
             color: #0540AD;
         }
-
         /* Google Gemini AI Glow Effect */
         @keyframes gemini-shimmer {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         .gemini-glow-container {
             position: relative;
             z-index: 1;
         }
-
         .gemini-glow-container::before {
             content: "";
             position: absolute;
@@ -162,7 +153,6 @@
             pointer-events: none;
             z-index: 50;
         }
-
         /* Chat Message Animation */
         @keyframes fadeInMsg {
             from { opacity: 0; transform: translateY(10px); }
@@ -171,7 +161,6 @@
         .animate-fade-in {
             animation: fadeInMsg 0.4s ease-out forwards;
         }
-
         /* Gold Rain Animation */
         @keyframes goldRain {
             0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
@@ -190,7 +179,6 @@
             pointer-events: none;
             animation: goldRain linear infinite;
         }
-
         /* Bonus Banner Pulse */
         @keyframes bonus-pulse {
             0%, 100% { transform: scale(1); border-color: #D4AF37; }
@@ -211,12 +199,10 @@
     </style>
 </head>
 <body class="font-sans text-textDark bg-white antialiased overflow-x-hidden">
-
     <!-- Navigation -->
     <div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
         <nav class="pointer-events-auto bg-navBg nav-glass border border-white/60 shadow-float rounded-full pl-6 pr-2 py-2 flex items-center justify-between max-w-5xl w-full transition-all duration-300 hover:shadow-lg">
             <a href="#" class="flex items-center gap-2.5 mr-4 group">
-                <!-- RÜCKGÄNGIG: Das "R" statt des Bildes -->
                 <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
                     R
                 </div>
@@ -232,7 +218,6 @@
                 <a href="#roi" class="nav-link relative z-10 px-4 py-1.5 text-sm font-medium text-textDark rounded-full">Ersparnis</a>
                 <a href="#faq" class="nav-link relative z-10 px-4 py-1.5 text-sm font-medium text-textDark rounded-full">FAQ</a>
             </div>
-
             <div class="flex items-center gap-3">
                 <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-primary text-white px-5 py-2.5 rounded-full font-bold text-xs hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/20 flex items-center gap-2">
                     Kostenlos starten 
@@ -259,13 +244,8 @@
     <!-- Hero Section (Optimized for Laptop View) -->
     <section id="start" class="relative pt-28 pb-16 lg:pt-36 lg:pb-24 px-4 overflow-hidden bg-primary">
         
-        <!-- NEU: Volles Bild mit Abdunklung (Option 2) -->
+        <!-- NEU: Volles Bild mit Abdunklung -->
         <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <!-- 
-                TIPP: Lade dein Bild als "hero-bg.jpg" hoch.
-                opacity-70: Bild ist deutlich sichtbar.
-                onerror: Lädt ein hochwertiges Fahrschul-Symbolbild aus dem Web, falls hero-bg.jpg fehlt.
-            -->
             <img 
                 src="hero-bg.jpg" 
                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=2000';" 
@@ -280,10 +260,10 @@
 
         <!-- Background Decor -->
         <div class="absolute top-0 right-0 w-2/3 h-full bg-white/5 skew-x-12 transform origin-top-right pointer-events-none z-10"></div>
-
+        
         <div class="max-w-7xl mx-auto relative z-20">
             <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                <!-- Left: New Content adapted to Blue Design -->
+                <!-- Left: Content -->
                 <div class="reveal space-y-6 lg:space-y-8 text-white">
                     <div class="inline-flex items-center gap-2 bg-blue-800/50 border border-blue-400/30 text-cyan-200 px-4 py-2 rounded-full text-xs lg:text-sm font-medium backdrop-blur-md">
                         <i data-lucide="sparkles" class="w-4 h-4 text-accent"></i>
@@ -823,15 +803,18 @@
         </div>
     </section>
 
-    <!-- NEW: AI Live Demo Section (Simulated) -->
+    <!-- AI Live Demo Section -->
     <section class="py-8 lg:py-16 bg-white relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div class="absolute top-1/4 -left-20 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-50"></div>
             <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-orange-50 rounded-full blur-3xl opacity-50"></div>
         </div>
+
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-8 reveal">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold mb-3 shadow-lg animate-pulse"><span class="text-lg">✨</span> Live AI Demo</div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-bold mb-3 shadow-lg animate-pulse">
+                    <span class="text-lg">✨</span> Live AI Demo
+                </div>
                 <h2 class="text-3xl lg:text-4xl font-bold text-[#1A1A1A] mb-3">Erlebe die KI in Aktion</h2>
                 <p class="text-base text-gray-600 max-w-2xl mx-auto">Wähle einen Modus und sieh zu, wie Retina Flow die Kommunikation übernimmt.</p>
             </div>
@@ -840,7 +823,7 @@
                 <!-- Left: Controls & Description -->
                 <div class="space-y-4 lg:space-y-5 order-2 lg:order-1">
                     
-                    <!-- 3 Round Switch Buttons (Menu Style) -->
+                    <!-- 3 Round Switch Buttons -->
                     <div class="flex justify-center lg:justify-start gap-4">
                         <!-- Button 1: Bewertungs-Autopilot -->
                         <button onclick="setScenario('passed')" id="btn-passed" class="animate-float-gentle group relative w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white border-2 border-blue-100 hover:border-accent hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-0.5 ring-2 ring-accent scale-105 active-scenario active-pulse">
@@ -894,9 +877,9 @@
                         </div>
                     </div>
 
-                    <!-- NEU: Leerer Container für Ergebnis-Box auf der LINKEN Seite -->
+                    <!-- Left Result Container -->
                     <div id="left-result-container" class="transition-all duration-500">
-                        <!-- Statischer Inhalt für initialen Load -->
+                        <!-- Default: Bewertungs-Autopilot Result -->
                         <div class="bg-white border border-green-100 rounded-2xl p-4 lg:p-5 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden group">
                             <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
                             
@@ -1151,6 +1134,7 @@
                         <input type="range" id="teachers" min="1" max="20" value="3" class="w-full" oninput="calculateROI()">
                         <div class="flex justify-between text-sm text-textGray mt-2"><span>1</span><span>20</span></div>
                     </div>
+
                     <div>
                         <div class="flex items-center justify-between mb-3">
                             <label class="text-lg font-bold text-textDark">Preis pro Fahrstunde (45 min)</label>
@@ -1159,6 +1143,7 @@
                         <input type="range" id="hourly-rate" min="40" max="120" value="60" step="5" class="w-full" oninput="calculateROI()">
                         <div class="flex justify-between text-sm text-textGray mt-2"><span>40€</span><span>120€</span></div>
                     </div>
+
                     <div>
                         <div class="flex items-center justify-between mb-3">
                             <label class="text-lg font-bold text-textDark">Zusätzliche Fahrstunden pro Woche/Lehrer</label>
@@ -1178,6 +1163,7 @@
                         <div class="text-4xl font-bold text-green-600 mb-1" id="monthly-revenue">1.560€</div>
                         <div class="text-sm text-textGray">für deine Fahrschule</div>
                     </div>
+
                     <div class="bg-white p-6 rounded-2xl shadow-card border border-gray-100 flex flex-col justify-center">
                         <div class="flex items-center gap-3 mb-3">
                             <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center"><i data-lucide="trending-up" class="w-6 h-6 text-accent"></i></div>
@@ -1207,14 +1193,16 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- FAQ Section - ERWEITERT MIT ALLEN FRAGEN -->
     <section id="faq" class="py-16 lg:py-24 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12 lg:mb-16 reveal">
                 <h2 class="text-3xl lg:text-5xl font-bold mb-4 lg:mb-6">Häufige Fragen</h2>
                 <p class="text-lg lg:text-xl text-textGray">Alles, was du über Retina Flow wissen musst</p>
             </div>
+
             <div class="space-y-4 reveal">
+                <!-- FAQ 1 -->
                 <div class="bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
                     <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition">
                         <span class="font-bold text-lg text-textDark">Wie funktioniert die WhatsApp-Integration?</span>
@@ -1224,10 +1212,83 @@
                         Retina Flow verbindet sich direkt mit deiner WhatsApp Business-Nummer. Die KI analysiert eingehende Nachrichten in Echtzeit und antwortet automatisch – entweder mit konkreten Terminvorschlägen oder mit relevanten Informationen. Du behältst volle Kontrolle: Wichtige Nachrichten werden an dich weitergeleitet, und du kannst jederzeit manuell eingreifen.
                     </div>
                 </div>
-                <!-- ... other FAQs truncated for brevity ... -->
-            </div>
-        </div>
-    </section>
+
+                <!-- FAQ 2 -->
+                <div class="bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition">
+                        <span class="font-bold text-lg text-textDark">Funktioniert das mit meiner bestehenden Fahrschulsoftware?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-textGray transition-transform"></i>
+                    </button>
+                    <div class="hidden px-8 pb-6 text-textGray leading-relaxed">
+                        Ja! Retina Flow integriert sich nahtlos mit allen gängigen Fahrschulsystemen wie "Fahren Lernen", "Fahrschulmanager" und "Office". Die Synchronisation läuft im Hintergrund – du musst nichts umstellen oder neu lernen. Deine bestehenden Abläufe bleiben unverändert, nur automatisiert.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition">
+                        <span class="font-bold text-lg text-textDark">Wie lange dauert die Einrichtung?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-textGray transition-transform"></i>
+                    </button>
+                    <div class="hidden px-8 pb-6 text-textGray leading-relaxed">
+                        Die komplette Einrichtung dauert 1-2 Wochen. Unser Team übernimmt die technische Integration, Anpassung an deine Prozesse und das Training der KI auf deine spezifischen Anforderungen. Du erhältst eine persönliche Einführung und bist danach sofort startklar – ohne IT-Kenntnisse erforderlich.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition">
+                        <span class="font-bold text-lg text-textDark">Ist Retina Flow DSGVO-konform?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-textGray transition-transform"></i>
+                    </button>
+                    <div class="hidden px-8 pb-6 text-textGray leading-relaxed">
+                        Absolut. Alle Daten werden auf deutschen Servern gespeichert und erfüllen die strengsten DSGVO-Anforderungen. Wir verwenden keine Daten für Werbezwecke und du behältst volle Kontrolle über alle Informationen. Ein detaillierter Auftragsverarbeitungsvertrag (AVV) ist im Onboarding enthalten.
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition">
+                        <span class="font-bold text-lg text-textDark">Was kostet Retina Flow?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-textGray transition-transform"></i>
+                    </button>
+                    <div class="hidden px-8 pb-6 text-textGray leading-relaxed">
+                        Die Preise sind transparent und skalieren mit deiner Fahrschulgröße. Für eine Fahrschule mit 3-5 Fahrlehrern liegt die monatliche Investition bei etwa 290€. Das entspricht weniger als 2 Stunden deiner Zeit pro Monat – während du 40+ Stunden sparst. Im kostenlosen Erstgespräch erstellen wir ein individuelles Angebot für deine Situation.
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition">
+                        <span class="font-bold text-lg text-textDark">Brauche ich alle Autopiloten oder kann ich einzeln buchen?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-textGray transition-transform"></i>
+                    </button>
+                    <div class="hidden px-8 pb-6 text-textGray leading-relaxed">
+                        Du kannst flexibel wählen. Viele Kunden starten mit dem Bewertungs-Autopiloten (schnellster ROI) und erweitern dann um Terminkoordination. Der Social-Media-Autopilot ist aktuell als Bonus für Komplett-Kunden inklusive – wenn du beide Kern-Autopiloten (Termine + Bewertungen) buchst, erhältst du ihn ohne Aufpreis dazu.
+                    </div>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition">
+                        <span class="font-bold text-lg text-textDark">Was bedeutet "Social Media inklusive"?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-textGray transition-transform"></i>
+                    </button>
+                    <div class="hidden px-8 pb-6 text-textGray leading-relaxed">
+                        Wenn du beide Kern-Autopiloten (Termine + Bewertungen) buchst, erhältst du den Social-Media-Autopiloten ohne Aufpreis dazu. Dieser generiert 40-60 Instagram/Facebook-Posts pro Jahr aus deinen Erfolgsmomenten – komplett automatisch. Normaler Wert: 1.200€/Jahr. Für Komplett-Kunden: kostenlos. Dieses Angebot ist limitiert auf die ersten 10 Fahrschulen.
+                    </div>
+                </div>
+
+                <!-- FAQ 8 - NEU -->
+                <div class="bg-white rounded-2xl shadow-card border border-gray-100 overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-gray-50 transition">
+                        <span class="font-bold text-lg text-textDark">Kann ich Retina Flow erstmal testen?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-textGray transition-transform"></i>
+                    </button>
+                    <div class="hidden px-8 pb-6 text-textGray leading-relaxed">
+                        Ja, absolut! Wir bieten eine 14-tägige Geld-zurück-Garantie. Du kannst Retina Flow risikofrei testen und bei Nichtgefallen innerhalb von 14 Tagen dein Geld zurückerhalten – ohne Wenn und Aber. Außerdem gibt es keine Mindestvertragslaufzeit, du kannst monatlich kündigen.
+                    </div>
+                </div>
 
     <!-- Final CTA Section -->
     <section class="py-24 px-4 bg-gradient-to-br from-primary via-blue-700 to-blue-900 text-white relative overflow-hidden">
@@ -1235,12 +1296,17 @@
             <div class="absolute top-0 right-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
             <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-orange-300 rounded-full blur-3xl"></div>
         </div>
+
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <div class="reveal space-y-8">
                 <h2 class="text-4xl lg:text-5xl font-bold leading-tight">Bereit für 10+ Stunden mehr Freizeit und bis zu 30.000€ Mehrumsatz?</h2>
                 <p class="text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">Buche jetzt dein kostenloses Erstgespräch und erfahre, wie Retina Flow deine Fahrschule automatisiert – ohne IT-Aufwand, ohne Risiko.</p>
+                
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-                    <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-accent text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-accentHover transition shadow-glow hover:shadow-2xl inline-flex items-center gap-3 group">Kostenloses Erstgespräch buchen<i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i></a>
+                    <a href="https://calendly.com/delkhazatto19/30min" target="_blank" class="bg-accent text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-accentHover transition shadow-glow hover:shadow-2xl inline-flex items-center gap-3 group">
+                        Kostenloses Erstgespräch buchen
+                        <i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1386,58 +1452,24 @@
             const teachers = parseInt(document.getElementById('teachers').value);
             const pricePerLesson = parseInt(document.getElementById('hourly-rate').value);
             const extraHours = parseInt(document.getElementById('extra-hours').value);
+
             document.getElementById('teachers-value').textContent = teachers;
             document.getElementById('rate-value').textContent = pricePerLesson + '€';
             document.getElementById('extra-hours-value').textContent = extraHours;
+
             const weeklyRevenue = teachers * extraHours * pricePerLesson;
             const monthlyRevenue = Math.round(weeklyRevenue * 4);
             const yearlyRevenue = weeklyRevenue * 52;
+
             document.getElementById('monthly-revenue').textContent = monthlyRevenue.toLocaleString('de-DE') + '€';
             document.getElementById('yearly-revenue').textContent = yearlyRevenue.toLocaleString('de-DE') + '€';
+
             document.getElementById('summary-teachers').textContent = teachers;
             document.getElementById('summary-hours').textContent = extraHours;
             document.getElementById('summary-total').textContent = yearlyRevenue.toLocaleString('de-DE') + '€';
         }
-        document.addEventListener('DOMContentLoaded', calculateROI);
 
-        function generateAIMessage() {
-            const name = document.getElementById('demo-name').value || "Lukas";
-            const scenario = document.getElementById('demo-scenario').value;
-            const aiLoading = document.getElementById('ai-loading');
-            const placeholder = document.getElementById('demo-placeholder');
-            const btn = document.getElementById('generate-btn');
-            btn.disabled = true;
-            btn.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Generiere...';
-            lucide.createIcons();
-            if (scenario === 'social') {
-                placeholder.classList.add('hidden');
-                const igLoading = document.getElementById('ig-loading');
-                const igPostContent = document.getElementById('ig-post-content');
-                igLoading.classList.remove('hidden');
-                igPostContent.classList.add('hidden');
-                setTimeout(() => {
-                    igLoading.classList.add('hidden');
-                    igPostContent.classList.remove('hidden');
-                    document.getElementById('ig-caption-text').textContent = `Endlich geschafft! 🥳 ${name} hat den Führerschein in der Tasche! 🚗💨 Wir wünschen dir allzeit gute und sichere Fahrt.`;
-                    setTimeout(() => { igPostContent.classList.add('opacity-100'); }, 50);
-                    btn.disabled = false;
-                    btn.innerHTML = '<i data-lucide="play" class="w-5 h-5 fill-current"></i> Demo starten';
-                    lucide.createIcons();
-                }, 2000);
-            } else {
-                placeholder.classList.add('hidden');
-                aiLoading.classList.remove('hidden');
-                setTimeout(() => {
-                    aiLoading.classList.add('hidden');
-                    const messageList = aiLoading.parentElement;
-                    document.querySelectorAll('.dynamic-msg').forEach(el => el.remove());
-                    const msg = createBotMessage(`Glückwunsch ${name}! 🎉 Würdest du uns bei Google bewerten? ⭐`);
-                    messageList.insertBefore(msg, aiLoading);
-                    btn.disabled = false;
-                    btn.innerHTML = '<i data-lucide="play" class="w-5 h-5 fill-current"></i> Demo starten';
-                }, 1500);
-            }
-        }
+        document.addEventListener('DOMContentLoaded', calculateROI);
 
         function createBotMessage(text) {
             const div = document.createElement('div');
@@ -1446,36 +1478,168 @@
             return div;
         }
 
+        function createUserMessage(text) {
+            const div = document.createElement('div');
+            div.className = 'dynamic-msg bg-[#E7FFDB] p-3 rounded-lg rounded-tr-none shadow-sm text-sm text-gray-800 max-w-[85%] self-end mb-3 animate-fade-in border border-[#dcf8c6]';
+            div.innerHTML = `<p>${text}</p><div class="text-[9px] text-gray-400 text-right mt-1">Gerade eben <i data-lucide="check-check" class="w-3 h-3 text-blue-400 inline"></i></div>`;
+            return div;
+        }
+
+        function generateAIMessage() {
+            const name = document.getElementById('demo-name').value || "Lukas";
+            const scenario = document.getElementById('demo-scenario').value;
+            
+            const aiLoading = document.getElementById('ai-loading');
+            const placeholder = document.getElementById('demo-placeholder');
+            const btn = document.getElementById('generate-btn');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i> Generiere...';
+            lucide.createIcons();
+
+            if (scenario === 'social') {
+                // SOCIAL MODE: Show IG Feed
+                placeholder.classList.add('hidden');
+                const igLoading = document.getElementById('ig-loading');
+                const igPostContent = document.getElementById('ig-post-content');
+                
+                igLoading.classList.remove('hidden');
+                igPostContent.classList.add('hidden');
+                
+                setTimeout(() => {
+                    igLoading.classList.add('hidden');
+                    igPostContent.classList.remove('hidden');
+                    document.getElementById('ig-caption-text').textContent = `Endlich geschafft! 🥳 ${name} hat den Führerschein in der Tasche! 🚗💨 Wir wünschen dir allzeit gute und sichere Fahrt.`;
+                    setTimeout(() => { igPostContent.classList.add('opacity-100'); }, 50);
+                    
+                    btn.disabled = false;
+                    btn.innerHTML = '<i data-lucide="play" class="w-5 h-5 fill-current"></i> Demo starten';
+                    lucide.createIcons();
+                }, 2000);
+            } else {
+                // WHATSAPP MODE
+                placeholder.classList.add('hidden');
+                aiLoading.classList.remove('hidden');
+                const messageList = aiLoading.parentElement;
+                
+                // WICHTIG: Alte dynamische Nachrichten entfernen
+                document.querySelectorAll('.dynamic-msg').forEach(el => el.remove());
+                
+                setTimeout(() => {
+                    aiLoading.classList.add('hidden');
+                    
+                    if (scenario === 'passed') {
+                        const msg = createBotMessage(`Hey ${name}! 🎉 Herzlichen Glückwunsch zum Führerschein! Würdest du uns bei Google bewerten? ⭐`);
+                        messageList.insertBefore(msg, aiLoading);
+                        lucide.createIcons();
+                    } else if (scenario === 'reminder') {
+                        const msg1 = createBotMessage(`Hey ${name}, wann kannst du nächste Woche fahren? 📅`);
+                        messageList.insertBefore(msg1, aiLoading);
+                        lucide.createIcons();
+                        
+                        setTimeout(() => {
+                            const msg2 = createUserMessage("Dienstag ab 14:00 Uhr.");
+                            messageList.insertBefore(msg2, aiLoading);
+                            
+                            setTimeout(() => {
+                                const msg3 = createBotMessage(`Alles klar! Dein Termin für Dienstag 14:00 ist gebucht. ✅`);
+                                messageList.insertBefore(msg3, aiLoading);
+                                lucide.createIcons();
+                            }, 1500);
+                        }, 1500);
+                    }
+                    
+                    btn.disabled = false;
+                    btn.innerHTML = '<i data-lucide="play" class="w-5 h-5 fill-current"></i> Demo starten';
+                    lucide.createIcons();
+                }, 1500);
+            }
+        }
+
         function setScenario(id) {
             document.getElementById('demo-scenario').value = id;
+            
+            // WICHTIG: Beim Wechsel alte Nachrichten entfernen (außer Welcome)
+            document.querySelectorAll('.dynamic-msg').forEach(el => el.remove());
+            
+            // Placeholder wieder anzeigen
+            const placeholder = document.getElementById('demo-placeholder');
+            placeholder.classList.remove('hidden');
+            
+            // UI Elements
+            const waHeader = document.getElementById('wa-header');
+            const igHeader = document.getElementById('ig-header');
+            const chatContainer = document.getElementById('chat-container');
+            const igFeed = document.getElementById('ig-feed');
+            const waInput = document.getElementById('wa-input');
+            const igNav = document.getElementById('ig-nav');
+            const demoControls = document.getElementById('demo-controls');
+            
+            // Update Button Styles
             ['passed', 'reminder', 'social'].forEach(btnId => {
                 const btn = document.getElementById('btn-' + btnId);
-                if (btnId === id) { btn.classList.add('ring-2', 'ring-accent', 'scale-105', 'active-pulse'); } else { btn.classList.remove('ring-2', 'ring-accent', 'scale-105', 'active-pulse'); }
+                if (btnId === id) {
+                    btn.classList.add('ring-2', 'ring-accent', 'scale-105', 'active-pulse');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-accent', 'scale-105', 'active-pulse');
+                }
             });
+            
+            // Toggle Screens
             if (id === 'social') {
-                document.getElementById('wa-header').classList.add('hidden');
-                document.getElementById('chat-container').classList.add('hidden');
-                document.getElementById('wa-input').classList.add('hidden');
-                document.getElementById('ig-header').classList.remove('hidden');
-                document.getElementById('ig-feed').classList.remove('hidden');
-                document.getElementById('ig-nav').classList.remove('hidden');
+                // SOCIAL MODE: Hide WhatsApp, Show IG
+                waHeader.classList.add('hidden');
+                chatContainer.classList.add('hidden');
+                waInput.classList.add('hidden');
+                demoControls.classList.add('hidden');
+                
+                igHeader.classList.remove('hidden');
+                igFeed.classList.remove('hidden');
+                igNav.classList.remove('hidden');
+                
+                // Reset IG content
+                const igPostContent = document.getElementById('ig-post-content');
+                igPostContent.classList.add('hidden');
+                igPostContent.classList.remove('opacity-100');
             } else {
-                document.getElementById('ig-header').classList.add('hidden');
-                document.getElementById('ig-feed').classList.add('hidden');
-                document.getElementById('ig-nav').classList.add('hidden');
-                document.getElementById('wa-header').classList.remove('hidden');
-                document.getElementById('chat-container').classList.remove('hidden');
-                document.getElementById('wa-input').classList.remove('hidden');
+                // WHATSAPP MODE: Hide IG, Show WhatsApp
+                igHeader.classList.add('hidden');
+                igFeed.classList.add('hidden');
+                igNav.classList.add('hidden');
+                
+                waHeader.classList.remove('hidden');
+                chatContainer.classList.remove('hidden');
+                waInput.classList.remove('hidden');
+                demoControls.classList.remove('hidden');
             }
+            
+            // Update Description & Results
             const content = scenarios[id];
             const contentDiv = document.getElementById('scenario-content');
             const leftResultContainer = document.getElementById('left-result-container');
+            
             contentDiv.style.opacity = '0';
             leftResultContainer.style.opacity = '0';
+            
             setTimeout(() => {
-                contentDiv.innerHTML = `<div class="absolute top-0 left-8 -translate-y-1/2 bg-white px-4 py-1 rounded-full border border-blue-100 text-xs font-bold text-primary shadow-sm uppercase tracking-wider">Der Ablauf</div><h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3"><span class="${content.headerBg} p-2 rounded-lg"><i data-lucide="${content.icon}" class="w-6 h-6 ${content.iconClass}"></i></span>${content.title}</h3><div class="text-sm lg:text-base text-gray-600 leading-relaxed space-y-3"><div class="flex gap-3"><span class="font-bold text-primary">1.</span><p>${content.steps[0]}</p></div><div class="flex gap-3"><span class="font-bold text-primary">2.</span><p>${content.steps[1]}</p></div><div class="flex gap-3"><span class="font-bold text-primary">3.</span><p>${content.steps[2]}</p></div></div>`;
+                contentDiv.innerHTML = `
+                    <div class="absolute top-0 left-8 -translate-y-1/2 bg-white px-4 py-1 rounded-full border border-blue-100 text-xs font-bold text-primary shadow-sm uppercase tracking-wider">
+                        Der Ablauf
+                    </div>
+                    <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                        <span class="${content.headerBg} p-2 rounded-lg"><i data-lucide="${content.icon}" class="w-6 h-6 ${content.iconClass}"></i></span>
+                        ${content.title}
+                    </h3>
+                    <div class="text-sm lg:text-base text-gray-600 leading-relaxed space-y-3">
+                        <div class="flex gap-3"><span class="font-bold text-primary">1.</span><p>${content.steps[0]}</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-primary">2.</span><p>${content.steps[1]}</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-primary">3.</span><p>${content.steps[2]}</p></div>
+                    </div>
+                `;
+                
                 leftResultContainer.innerHTML = content.extraHtml;
                 lucide.createIcons();
+                
                 contentDiv.style.opacity = '1';
                 leftResultContainer.style.opacity = '1';
             }, 200);
@@ -1483,12 +1647,31 @@
 
         function toggleFaq(button) {
             const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
             content.classList.toggle('hidden');
+            icon.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        if(mobileBtn) {
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('hidden');
         }
 
         const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); } });
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
         }, { threshold: 0.1 });
+
         document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     </script>
 </body>
