@@ -25,10 +25,8 @@
     
     <!-- Babel for JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Lucide Icons (React UMD Build) - Using jsdelivr for better stability -->
+    <!-- Lucide Icons (React UMD Build) -->
     <script src="https://cdn.jsdelivr.net/npm/lucide-react@0.454.0/dist/umd/lucide-react.min.js"></script>
-
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -73,7 +71,6 @@
             }
         }
     </script>
-
     <style>
         body {
             background-color: #FAFAFA;
@@ -102,7 +99,6 @@
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
         .gemini-glow-container::before {
             content: "";
             position: absolute;
@@ -117,12 +113,10 @@
             mask-composite: exclude;
             z-index: 50;
         }
-
         @keyframes gemini-shimmer {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
-
         /* Hide scrollbar for Chrome, Safari and Opera */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
@@ -136,7 +130,6 @@
 </head>
 <body>
     <div id="root"></div>
-
     <script type="text/babel">
         // --- Setup Dependencies ---
         const { useState, useEffect, useRef } = React;
@@ -150,7 +143,6 @@
                 <line x1="9" y1="21" x2="9" y2="9"></line>
             </svg>
         );
-
         // Safe Icon Proxy
         // If window.lucideReact is defined, use it.
         // If not, or if a specific icon is missing, return FallbackIcon to prevent crash.
@@ -161,7 +153,6 @@
                 return FallbackIcon;
             }
         });
-
         // Destructure icons from our Safe Proxy
         const { 
             Lock, Calendar, ImagePlus, Wand2, Sparkles, Loader2, ArrowRight, 
@@ -175,14 +166,11 @@
             Mic, ChevronDown, Mail, Check, Calculator, Menu, TrendingDown, 
             ShieldAlert, MessageSquareX, BarChart3
         } = Icons;
-
         // --- COMPONENTS ---
-
         // 1. Reveal Component
         const Reveal = ({ children, className = '', delay = '0s' }) => {
             const ref = useRef(null);
             const [isActive, setIsActive] = useState(false);
-
             useEffect(() => {
                 const observer = new IntersectionObserver(
                     (entries) => {
@@ -195,14 +183,11 @@
                     },
                     { threshold: 0.1 }
                 );
-
                 if (ref.current) {
                     observer.observe(ref.current);
                 }
-
                 return () => observer.disconnect();
             }, []);
-
             return (
                 <div
                     ref={ref}
@@ -213,7 +198,6 @@
                 </div>
             );
         };
-
         // 2. Navigation Component
         const LINKS = [
             { id: 'start', label: 'Start' },
@@ -222,13 +206,11 @@
             { id: 'roi', label: 'Ersparnis' },
             { id: 'faq', label: 'FAQ' },
         ];
-
         const Navigation = () => {
             const [activeSection, setActiveSection] = useState('start');
             const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
             const [markerStyle, setMarkerStyle] = useState({ left: 0, width: 0, opacity: 0 });
             const navRef = useRef(null);
-
             useEffect(() => {
                 const handleScroll = () => {
                     const scrollY = window.scrollY;
@@ -244,16 +226,13 @@
                             }
                         }
                     });
-
                     if (!current && scrollY < 100) current = 'start';
                     if (current) setActiveSection(current);
                 };
-
                 window.addEventListener('scroll', handleScroll);
                 handleScroll(); 
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
-
             useEffect(() => {
                 const activeLink = document.querySelector(`a[href="#${activeSection}"].nav-link`);
                 if (activeLink && navRef.current) {
@@ -269,10 +248,8 @@
                     }
                 }
             }, [activeSection]);
-
             const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
             const closeMenu = () => setMobileMenuOpen(false);
-
             return (
                 <>
                     <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
@@ -281,12 +258,13 @@
                             className="pointer-events-auto bg-navBg nav-glass border border-white/60 shadow-float rounded-full pl-6 pr-2 py-2 flex items-center justify-between max-w-5xl w-full transition-all duration-300 hover:shadow-lg"
                         >
                             <a href="#" className="flex items-center gap-2.5 mr-4 group">
-                                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold shadow-sm group-hover:scale-105 transition-transform">
-                                    RF
-                                </div>
+                                <img 
+                                    src="social_post.jpeg" 
+                                    alt="Retina Flow Logo" 
+                                    className="w-8 h-8 rounded-lg object-cover shadow-sm group-hover:scale-105 transition-transform"
+                                />
                                 <span className="font-bold text-lg tracking-tight text-primary">Retina Flow</span>
                             </a>
-
                             <div className="hidden md:flex items-center relative bg-gray-100/50 rounded-full p-1.5 border border-white/40">
                                 <div 
                                     id="nav-marker" 
@@ -303,7 +281,6 @@
                                     </a>
                                 ))}
                             </div>
-
                             <div className="flex items-center gap-3">
                                 <a href="https://calendly.com/delkhazatto19/30min" target="_blank" rel="noreferrer" className="bg-primary text-white px-5 py-2.5 rounded-full font-bold text-xs hover:bg-blue-800 transition shadow-lg hover:shadow-blue-900/20 flex items-center gap-2">
                                     Gespräch 
@@ -319,7 +296,6 @@
                             </div>
                         </nav>
                     </div>
-
                     <div className={`fixed top-20 left-4 right-4 bg-white/95 backdrop-blur-xl shadow-2xl rounded-3xl p-6 z-40 border border-gray-100 transform transition-all duration-300 origin-top ${mobileMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-0 opacity-0 hidden'}`}>
                         <div className="flex flex-col gap-3">
                             {LINKS.map((link) => (
@@ -337,14 +313,13 @@
                 </>
             );
         };
-
         // 3. Hero Component
         const Hero = () => {
             return (
                 <section id="start" className="relative pt-28 pb-16 lg:pt-36 lg:pb-32 px-4 overflow-hidden bg-bgDark">
                     <div className="absolute inset-0 z-0 pointer-events-none">
                         <img 
-                            src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop" 
+                            src="IMG_1319.png" 
                             alt="Fahrschule Management" 
                             className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
                         />
@@ -395,7 +370,6 @@
                                         <Calculator className="w-6 h-6 text-accent" />
                                     </a>
                                 </div>
-
                                 <div className="flex items-center gap-6 pt-10 border-t border-white/5">
                                     <div className="flex -space-x-4">
                                         {[1,2,3,4].map(i => (
@@ -423,34 +397,33 @@
                 </section>
             );
         };
-
         // 4. ProblemSection
         const ProblemSection = () => {
             return (
-                <section id="problems" className="py-32 px-6 bg-bgDark text-white relative">
-                    <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                <section id="problems" className="py-32 px-6 bg-white text-textDark relative">
+                    <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-black/5 to-transparent"></div>
                     
                     <div className="max-w-7xl mx-auto relative z-10">
                         <Reveal className="text-center mb-24">
-                            <div className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-black uppercase tracking-widest mb-6">Realitäts-Check</div>
-                            <h2 className="text-5xl lg:text-7xl font-black mb-8 tracking-tighter text-white">
+                            <div className="inline-block px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-600 text-xs font-black uppercase tracking-widest mb-6">Realitäts-Check</div>
+                            <h2 className="text-5xl lg:text-7xl font-black mb-8 tracking-tighter text-gray-900">
                                 Warum deine Fahrschule <br/>
-                                <span className="text-gray-500">unnötig Zeit verliert.</span>
+                                <span className="text-red-600">unnötig Zeit verliert.</span>
                             </h2>
-                            <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+                            <p className="text-xl text-gray-900 max-w-2xl mx-auto font-medium leading-relaxed">
                                 Du hast deine Fahrschule gegründet, um Unternehmer zu sein – nicht um der hochbezahlte 24/7-Notdienst für Terminfragen zu spielen.
                             </p>
                         </Reveal>
                         
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                             {/* Problem 1: Der teure Sekretär */}
-                            <Reveal className="bg-[#0f0f13] border border-white/5 p-12 rounded-[2.5rem] hover:border-white/20 transition-all duration-500 group relative overflow-hidden">
+                            <Reveal className="bg-[#0f0f13] border border-white/5 p-12 rounded-[2.5rem] hover:border-white/20 transition-all duration-500 group relative overflow-hidden text-white">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-red-500/10 transition-all"></div>
                                 <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 group-hover:scale-110 transition-transform">
                                     <Users className="w-8 h-8 text-red-500" />
                                 </div>
                                 <h3 className="text-3xl font-black mb-6 text-white tracking-tight">Der "Teure Sekretär"-Effekt</h3>
-                                <p className="text-gray-400 mb-10 leading-relaxed text-lg">
+                                <p className="text-gray-300 mb-10 leading-relaxed text-lg">
                                     Deine Fahrlehrer (und du) verbringen pro Woche mehrere Stunden mit Nachrichten tippen. Das sind teure Arbeitsstunden, in denen keine Fahrstunde gegeben wird. Du bezahlst Fahrlehrer-Gehalt für Sekretariats-Arbeit.
                                 </p>
                                 <div className="space-y-4">
@@ -459,22 +432,21 @@
                                         "Fehlender Feierabend durch WhatsApp-Druck",
                                         "Kein Überblick über Absprachen"
                                     ].map((p, idx) => (
-                                        <div key={idx} className="flex items-center gap-4 text-gray-500 group-hover:text-gray-300 transition-colors">
+                                        <div key={idx} className="flex items-center gap-4 text-gray-400 group-hover:text-gray-200 transition-colors">
                                             <MessageSquareX className="w-5 h-5 text-red-500/50 flex-shrink-0" />
                                             <span className="text-sm font-medium">{p}</span>
                                         </div>
                                     ))}
                                 </div>
                             </Reveal>
-
                             {/* Problem 2: Wachstum bringt Chaos */}
-                            <Reveal className="bg-[#0f0f13] border border-white/5 p-12 rounded-[2.5rem] hover:border-white/20 transition-all duration-500 group relative overflow-hidden" delay="0.2s">
+                            <Reveal className="bg-[#0f0f13] border border-white/5 p-12 rounded-[2.5rem] hover:border-white/20 transition-all duration-500 group relative overflow-hidden text-white" delay="0.2s">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-orange-500/10 transition-all"></div>
                                 <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 group-hover:scale-110 transition-transform">
                                     <TrendingDown className="w-8 h-8 text-orange-500" />
                                 </div>
                                 <h3 className="text-3xl font-black mb-6 text-white tracking-tight">Wachstum bringt aktuell nur Chaos</h3>
-                                <p className="text-gray-400 mb-10 leading-relaxed text-lg">
+                                <p className="text-gray-300 mb-10 leading-relaxed text-lg">
                                     Mehr Schüler bedeuten aktuell zwingend mehr Arbeit am Handy. Du kannst deinen Betrieb nicht vergrößern, ohne selbst auszubrennen oder ständig neues Büro-Personal zu suchen.
                                 </p>
                                 <div className="space-y-4">
@@ -483,22 +455,21 @@
                                         "Expansion fühlt sich wie mehr Last an",
                                         "Keine Zeit für strategische Planung"
                                     ].map((p, idx) => (
-                                        <div key={idx} className="flex items-center gap-4 text-gray-500 group-hover:text-gray-300 transition-colors">
+                                        <div key={idx} className="flex items-center gap-4 text-gray-400 group-hover:text-gray-200 transition-colors">
                                             <BarChart3 className="w-5 h-5 text-orange-500/50 flex-shrink-0" />
                                             <span className="text-sm font-medium">{p}</span>
                                         </div>
                                     ))}
                                 </div>
                             </Reveal>
-
                             {/* Problem 3: Unsichtbare Qualität */}
-                            <Reveal className="bg-[#0f0f13] border border-white/5 p-12 rounded-[2.5rem] hover:border-white/20 transition-all duration-500 group relative overflow-hidden" delay="0.3s">
+                            <Reveal className="bg-[#0f0f13] border border-white/5 p-12 rounded-[2.5rem] hover:border-white/20 transition-all duration-500 group relative overflow-hidden text-white" delay="0.3s">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-blue-500/10 transition-all"></div>
                                 <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10 group-hover:scale-110 transition-transform">
                                     <ShieldAlert className="w-8 h-8 text-blue-500" />
                                 </div>
                                 <h3 className="text-3xl font-black mb-6 text-white tracking-tight">Die unsichtbare Konkurrenz</h3>
-                                <p className="text-gray-400 mb-10 leading-relaxed text-lg">
+                                <p className="text-gray-300 mb-10 leading-relaxed text-lg">
                                     Deine Fahrlehrer machen einen super Job, aber online sieht man das nicht. Die Konkurrenz sammelt fleißig Bewertungen, während deine Erfolge im Auto bleiben. Du verlierst Anmeldungen an Fahrschulen, die schlechter ausbilden.
                                 </p>
                                 <div className="space-y-4">
@@ -507,7 +478,7 @@
                                         "Potenzielle Schüler gehen zur Konkurrenz",
                                         "Abhängigkeit von teuren Anzeigen"
                                     ].map((p, idx) => (
-                                        <div key={idx} className="flex items-center gap-4 text-gray-500 group-hover:text-gray-300 transition-colors">
+                                        <div key={idx} className="flex items-center gap-4 text-gray-400 group-hover:text-gray-200 transition-colors">
                                             <ShieldAlert className="w-5 h-5 text-blue-500/50 flex-shrink-0" />
                                             <span className="text-sm font-medium">{p}</span>
                                         </div>
@@ -519,7 +490,6 @@
                 </section>
             );
         };
-
         // 5. BeforeAfterSection
         const BeforeAfterSection = () => {
             return (
@@ -661,7 +631,6 @@
                 </section>
             );
         };
-
         // 6. SolutionsSection
         const SolutionsSection = () => {
             return (
@@ -745,7 +714,6 @@
                 </section>
             );
         };
-
         // 7. BonusSection
         const BonusSection = () => {
             return (
@@ -796,7 +764,6 @@
                 </section>
             );
         };
-
         // 8. Calendly Section
         const CalendlyWidget = () => {
             useEffect(() => {
@@ -810,7 +777,6 @@
                     head?.appendChild(script);
                 }
             }, []);
-
             return (
                 <div 
                     className="calendly-inline-widget" 
@@ -819,7 +785,6 @@
                 />
             );
         };
-
         const CalendlySection = ({ dark = false }) => (
             <section id="termin" className={`py-20 px-4 ${dark ? 'bg-[#0a0a0c] text-white' : 'bg-bgLight border-t border-gray-100'} relative overflow-hidden`}>
                 <div className="max-w-5xl mx-auto relative z-10">
@@ -837,7 +802,6 @@
                         <div className="mt-12 bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100">
                             <CalendlyWidget />
                         </div>
-
                         <div className="pt-8 flex flex-col items-center gap-4">
                             <p className="text-sm text-textGray flex items-center gap-2">
                                 <Lock className="w-4 h-4 text-green-500" /> Datenschutzkonform & sicher • 30 Tage Geld-zurück-Garantie
@@ -847,7 +811,6 @@
                 </div>
             </section>
         );
-
         // 9. DemoSection
         const SCENARIOS = {
             passed: {
@@ -881,7 +844,6 @@
                 ]
             }
         };
-
         const DemoSection = () => {
             const [activeScenario, setActiveScenario] = useState('passed');
             const [demoName, setDemoName] = useState('Lukas');
@@ -890,18 +852,15 @@
             const [igLike, setIgLike] = useState(false);
             const [showIgPost, setShowIgPost] = useState(false);
             const chatEndRef = useRef(null);
-
             const handleScenarioChange = (id) => {
                 setActiveScenario(id);
                 setMessages([]);
                 setShowIgPost(false);
             };
-
             const runDemo = () => {
                 setIsLoading(true);
                 setMessages([]);
                 setShowIgPost(false);
-
                 setTimeout(() => {
                     setIsLoading(false);
                     if (activeScenario === 'social') {
@@ -917,13 +876,11 @@
                     }
                 }, 1500);
             };
-
             useEffect(() => {
                 if (chatEndRef.current) {
                     chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
                 }
             }, [messages, isLoading]);
-
             const renderResultBox = () => {
                 if (activeScenario === 'passed') {
                     return (
@@ -975,7 +932,6 @@
                     );
                 }
             }
-
             return (
                 <section className="py-16 lg:py-24 bg-[#050507] text-white relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
@@ -989,7 +945,6 @@
                             <h2 className="text-3xl lg:text-5xl font-bold text-white mb-4 tracking-tight">Erlebe die KI in Aktion</h2>
                             <p className="text-lg text-gray-400 max-w-2xl mx-auto font-light">Wähle einen Modus und sieh zu, wie Retina Flow die Kommunikation übernimmt.</p>
                         </Reveal>
-
                         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start delay-100">
                             {/* Left Controls */}
                             <div className="space-y-6 order-2 lg:order-1">
@@ -1008,7 +963,6 @@
                                         </div>
                                         <span className={`text-[9px] font-bold uppercase tracking-wide group-hover:text-accent ${activeScenario === 'reminder' ? 'text-accent' : 'text-gray-400'}`}>Termin</span>
                                     </button>
-
                                     <button onClick={() => handleScenarioChange('social')} className={`animate-float-gentle group relative w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white border hover:border-accent hover:shadow-[0_0_20px_rgba(41,151,255,0.3)] transition-all duration-300 flex flex-col items-center justify-center gap-1 backdrop-blur-sm ${activeScenario === 'social' ? 'ring-2 ring-accent scale-105 border-accent active-pulse' : 'border-gray-100 ring-transparent'}`} style={{animationDelay: '2s'}}>
                                         <div className="absolute -top-1 -right-1 bg-accent text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow-sm z-10">NEU</div>
                                         <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-0.5 transition-transform group-hover:scale-110 ${activeScenario === 'social' ? 'bg-blue-50' : 'bg-gray-50'}`}>
@@ -1017,7 +971,6 @@
                                         <span className={`text-[9px] font-bold uppercase tracking-wide group-hover:text-accent ${activeScenario === 'social' ? 'text-accent' : 'text-gray-400'}`}>Social</span>
                                     </button>
                                 </div>
-
                                 <div className="bg-white rounded-3xl p-6 lg:p-8 border border-gray-100 shadow-xl relative backdrop-blur-md">
                                     <div className="absolute top-0 left-8 -translate-y-1/2 bg-blue-50 px-4 py-1 rounded-full border border-blue-100 text-xs font-bold text-blue-600 shadow-sm uppercase tracking-wider">
                                         Der Ablauf
@@ -1037,7 +990,6 @@
                                 </div>
                                 
                                 {renderResultBox()}
-
                                 {activeScenario !== 'social' && (
                                     <div className="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-lg relative backdrop-blur-sm">
                                         <div className="mb-4">
@@ -1061,7 +1013,6 @@
                                         </div>
                                     </div>
                                 )}
-
                                 {activeScenario === 'social' && (
                                     <div className="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-lg relative backdrop-blur-sm">
                                         <div className="mb-4">
@@ -1079,7 +1030,6 @@
                                     </div>
                                 )}
                             </div>
-
                             {/* Right Phone Mockup */}
                             <div className="relative w-full max-w-sm mx-auto lg:mr-0 order-1 lg:order-2">
                                 <div className="relative bg-gray-900 rounded-[2.5rem] p-3 shadow-2xl border-4 border-gray-800 ring-1 ring-white/20">
@@ -1093,7 +1043,6 @@
                                                 <BatteryFull className="w-3 h-3" />
                                             </div>
                                         </div>
-
                                         {activeScenario !== 'social' ? (
                                             <>
                                                 {/* WA Header */}
@@ -1109,7 +1058,6 @@
                                                         <Phone className="w-5 h-5" />
                                                     </div>
                                                 </div>
-
                                                 {/* Chat Area */}
                                                 <div className="bg-[#ECE5DD] flex-1 p-3 overflow-y-auto relative no-scrollbar" id="chat-container">
                                                     <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: "url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')", backgroundSize: '400px' }}></div>
@@ -1120,14 +1068,12 @@
                                                             <p className="leading-relaxed relative z-10">Hey! 👋 Ich bin dein Retina Flow Assistent. Wähle links einen Modus aus.</p>
                                                             <div className="text-[8px] text-gray-400 text-right mt-0.5 flex justify-end gap-1 items-center relative z-10">09:41 <CheckCheck className="w-2.5 h-2.5 text-blue-400"/></div>
                                                         </div>
-
                                                         {messages.map((msg, idx) => (
                                                             <div key={idx} className="animate-fade-in bg-[#E7FFDB] p-2.5 rounded-lg rounded-tr-none shadow-sm text-xs text-gray-800 max-w-[85%] self-end relative border border-green-100">
                                                                 <p className="leading-relaxed">{msg}</p>
                                                                 <div className="text-[8px] text-gray-400 text-right mt-0.5 flex justify-end gap-1 items-center">Gerade eben <CheckCheck className="w-2.5 h-2.5 text-blue-400"/></div>
                                                             </div>
                                                         ))}
-
                                                         {isLoading && (
                                                             <div className="bg-white p-2.5 rounded-lg rounded-tl-none shadow-sm w-12 self-start">
                                                                 <div className="flex gap-1 justify-center">
@@ -1163,7 +1109,6 @@
                                                     </div>
                                                     <MoreHorizontal className="w-5 h-5 text-black" />
                                                 </div>
-
                                                 {/* IG Feed */}
                                                 <div className="bg-white flex-1 overflow-y-auto relative no-scrollbar">
                                                     {isLoading && (
@@ -1189,7 +1134,7 @@
                                                             </div>
                                                             <div className="relative w-full h-56 bg-gray-100 overflow-hidden">
                                                                 <img 
-                                                                    src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop" 
+                                                                    src="Gemini_Generated_Image_i65srbi65srbi65s.png" 
                                                                     alt="Führerschein bestanden" 
                                                                     className="w-full h-full object-cover"
                                                                 />
@@ -1235,21 +1180,18 @@
                 </section>
             );
         };
-
         // 10. ROICalculator
         const ROICalculator = () => {
             const [teachers, setTeachers] = useState(3);
             const [hourlyRate, setHourlyRate] = useState(60);
             const [savedHoursPerWeek, setSavedHoursPerWeek] = useState(4);
             const [results, setResults] = useState({ monthly: 0, yearly: 0, time: 0 });
-
             useEffect(() => {
                 const weeklyRevenue = teachers * savedHoursPerWeek * hourlyRate;
                 const yearly = weeklyRevenue * 52;
                 const monthlyAvg = Math.round(yearly / 12);
                 setResults({ monthly: monthlyAvg, yearly: yearly, time: teachers * savedHoursPerWeek });
             }, [teachers, hourlyRate, savedHoursPerWeek]);
-
             return (
                 <section id="roi" className="py-24 px-4 bg-white">
                     <div className="max-w-6xl mx-auto">
@@ -1298,7 +1240,6 @@
                                         <p className="text-[10px] text-gray-400 mt-2 italic">Durschnittlich 4-6 Stunden pro Woche gehen für WhatsApp & Orga verloren.</p>
                                     </div>
                                 </div>
-
                                 <div className="space-y-6">
                                     <div className="bg-white p-8 rounded-2xl shadow-card border border-gray-100 relative overflow-hidden group">
                                         <div className="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-8 -mt-8 opacity-50"></div>
@@ -1311,7 +1252,6 @@
                                             Das ist der Umsatz, den dein Team aktuell durch Tippen statt Fahren verliert.
                                         </p>
                                     </div>
-
                                     <div className="bg-primary text-white p-8 rounded-2xl shadow-xl border border-blue-400/30">
                                         <div className="flex items-start gap-4 mb-4">
                                             <Clock className="w-6 h-6 text-blue-200 shrink-0 mt-1" />
@@ -1331,7 +1271,6 @@
                 </section>
             );
         };
-
         // 11. FAQ Component
         const FAQS = [
             {
@@ -1359,14 +1298,11 @@
                 answer: "Ja. Wir bieten eine 30-Tage-Geld-zurück-Garantie. Wenn du merkst, dass das System dir keine Zeit spart oder nicht zu deinem Betrieb passt, erstatten wir dir jeden Cent zurück. Ohne Wenn und Aber."
             }
         ];
-
         const FAQ = () => {
             const [openIndex, setOpenIndex] = useState(null);
-
             const toggle = (index) => {
                 setOpenIndex(openIndex === index ? null : index);
             };
-
             return (
                 <section id="faq" className="py-16 lg:py-24 px-4 bg-gradient-to-br from-gray-50 to-blue-50">
                     <div className="max-w-4xl mx-auto">
@@ -1396,7 +1332,6 @@
                 </section>
             );
         };
-
         // 12. Footer Component
         const Footer = () => {
             return (
@@ -1435,7 +1370,6 @@
                 </footer>
             );
         };
-
         // 13. FloatingBookingBtn Component
         const FloatingBookingBtn = () => (
             <a 
@@ -1448,7 +1382,6 @@
                 <Calendar className="w-6 h-6" />
             </a>
         );
-
         // 14. AIChatAssistant (Simplified Mock)
         const AIChatAssistant = () => {
             const [isOpen, setIsOpen] = useState(false);
@@ -1472,174 +1405,12 @@
                 </div>
             )
         };
-
-        // 15. AI Studio Section (Mocked for Demo purposes as API keys can't be stored in static HTML safely)
-        const AIStudio = () => {
-            const [image, setImage] = useState(null);
-            const [prompt, setPrompt] = useState("");
-            const [isProcessing, setIsProcessing] = useState(false);
-            const [resultImage, setResultImage] = useState(null);
-            const fileInputRef = useRef(null);
-
-            const handleFileChange = (e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        setImage(reader.result);
-                        setResultImage(null);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-
-            const processImage = async () => {
-                if (!image || !prompt) return;
-                
-                setIsProcessing(true);
-                // Simulation of API Call
-                setTimeout(() => {
-                    setResultImage(image); // In Demo just return same image
-                    setIsProcessing(false);
-                }, 2000);
-            };
-
-            return (
-                <section id="ai-studio" className="py-24 px-6 bg-[#0a0a0c] text-white relative">
-                    <div className="max-w-7xl mx-auto">
-                        <Reveal className="text-center mb-16">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/20 border border-accent/30 text-accent text-xs font-bold mb-4 uppercase tracking-widest">
-                                <Sparkles className="w-3 h-3" /> Nano Banana Powered
-                            </div>
-                            <h2 className="text-4xl lg:text-6xl font-bold mb-6">Retina AI Image Studio</h2>
-                            <p className="text-xl text-gray-400 max-w-3xl mx-auto font-light">
-                                Bearbeite deine Fahrschulfotos wie ein Profi – einfach per Texteingabe. Füge Filter hinzu, entferne Hintergründe oder erstelle "Bestanden"-Designs in Sekunden.
-                            </p>
-                        </Reveal>
-
-                        <div className="grid lg:grid-cols-2 gap-12 items-start">
-                            <Reveal className="space-y-8">
-                                <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
-                                    <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                                        <ImagePlus className="text-accent" /> Schritt 1: Bild wählen
-                                    </h3>
-                                    <div 
-                                        onClick={() => fileInputRef.current?.click()}
-                                        className="relative aspect-video rounded-2xl border-2 border-dashed border-white/20 hover:border-accent/50 transition-colors flex flex-col items-center justify-center cursor-pointer group overflow-hidden bg-black/20"
-                                    >
-                                        {image ? (
-                                            <img src={image} className="w-full h-full object-cover" alt="Vorschau" />
-                                        ) : (
-                                            <>
-                                                <ImagePlus className="w-12 h-12 text-gray-500 mb-4 group-hover:scale-110 transition-transform" />
-                                                <p className="text-gray-400 font-medium">Klicke zum Hochladen</p>
-                                            </>
-                                        )}
-                                        <input 
-                                            type="file" 
-                                            ref={fileInputRef} 
-                                            onChange={handleFileChange} 
-                                            className="hidden" 
-                                            accept="image/*" 
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
-                                    <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                                        <Wand2 className="text-accent" /> Schritt 2: Prompt eingeben
-                                    </h3>
-                                    <div className="space-y-4">
-                                        <textarea 
-                                            value={prompt}
-                                            onChange={(e) => setPrompt(e.target.value)}
-                                            placeholder='z.B. "Füge einen Retro-Filter hinzu und schreibe BESTANDEN in Gold darüber"'
-                                            className="w-full bg-black/40 border border-white/10 rounded-2xl p-4 text-white placeholder-gray-500 focus:border-accent outline-none transition h-32"
-                                        />
-                                        <div className="flex flex-wrap gap-2">
-                                            {["Retro Filter", "Hintergrund entfernen", "Schwarz-Weiß", "Goldenes Badge hinzufügen"].map((tag) => (
-                                                <button 
-                                                    key={tag}
-                                                    onClick={() => setPrompt(tag)}
-                                                    className="text-xs bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-full transition"
-                                                >
-                                                    {tag}
-                                                </button>
-                                            ))}
-                                        </div>
-                                        <button 
-                                            onClick={processImage}
-                                            disabled={isProcessing || !image || !prompt}
-                                            className="w-full bg-accent text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 hover:brightness-110 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-glow"
-                                        >
-                                            {isProcessing ? (
-                                                <Loader2 className="animate-spin" />
-                                            ) : (
-                                                <>
-                                                    <Sparkles className="w-5 h-5" />
-                                                    Magie anwenden
-                                                </>
-                                            )}
-                                        </button>
-                                    </div>
-                                </div>
-                            </Reveal>
-
-                            <Reveal className="h-full" delay="0.2s">
-                                <div className="bg-gradient-to-br from-accent/20 to-primary/20 border border-white/10 rounded-3xl p-8 backdrop-blur-md h-full min-h-[500px] flex flex-col items-center justify-center relative overflow-hidden group">
-                                    <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[100px] pointer-events-none"></div>
-                                    
-                                    {resultImage ? (
-                                        <div className="relative w-full h-full animate-fade-in flex flex-col">
-                                            <h4 className="text-center font-bold text-accent mb-6 flex items-center justify-center gap-2">
-                                                <Sparkles className="w-4 h-4" /> Dein KI-bearbeitetes Bild
-                                            </h4>
-                                            <div className="flex-1 rounded-2xl overflow-hidden shadow-2xl border border-white/20">
-                                                <img src={resultImage} className="w-full h-full object-contain bg-black" alt="Ergebnis" />
-                                            </div>
-                                            <div className="mt-6 flex gap-4">
-                                                <button 
-                                                    onClick={() => {
-                                                        const link = document.createElement('a');
-                                                        link.href = resultImage;
-                                                        link.download = 'retina-flow-edit.png';
-                                                        link.click();
-                                                    }}
-                                                    className="flex-1 bg-white text-black py-3 rounded-xl font-bold hover:bg-gray-100 transition flex items-center justify-center gap-2"
-                                                >
-                                                    Bild speichern
-                                                </button>
-                                                <button 
-                                                    onClick={() => { setResultImage(null); setPrompt(""); }}
-                                                    className="flex-1 bg-white/10 text-white py-3 rounded-xl font-bold hover:bg-white/20 transition"
-                                                >
-                                                    Neu starten
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="text-center space-y-6">
-                                            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto border border-white/10 animate-pulse">
-                                                <Wand2 className="w-10 h-10 text-gray-600" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <h4 className="text-2xl font-bold text-gray-300">Bereit für die Magie?</h4>
-                                                <p className="text-gray-500 max-w-xs mx-auto">
-                                                    Lade ein Bild hoch und gib einen Befehl ein, um die KI-Transformation zu starten.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </Reveal>
-                        </div>
-                    </div>
-                </section>
-            );
-        };
-
         // --- MAIN APP COMPONENT ---
         const App = () => {
+            useEffect(() => {
+                // Force scroll to top on mount
+                window.scrollTo(0, 0);
+            }, []);
             return (
                 <div className="font-sans text-textDark bg-white antialiased overflow-x-hidden">
                     <Navigation />
@@ -1652,7 +1423,7 @@
                     <div id="demo">
                         <DemoSection />
                     </div>
-                    <AIStudio />
+                    {/* AI Studio Removed */}
                     <ROICalculator />
                     <FAQ />
                     <CalendlySection dark={true} />
@@ -1662,11 +1433,9 @@
                 </div>
             );
         };
-
         // --- RENDER ---
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
-
     </script>
 </body>
 </html>
